@@ -2,11 +2,9 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Redirect, NavLink } from 'react-router-dom';
 import { Navbar } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { queryString } from 'query-string'
-import Signup from './containers/Signup';
 
 
 class App extends Component {
@@ -14,36 +12,33 @@ class App extends Component {
     super();
     this.state = {
       // currentUser: null,
-      results: []
+      results: [],
+      currentUser: null
     }
     // this.updateCurrentUser = this.updateCurrentUser.bind(this);
   }
 
   
-  // componentDidMount(){
-  //   let that = this
-  //   axios.get('/users/check_for_user',{
-  //   })
-  //   .then(function(response){
-  //     if(response.data.email){
-  //       that.setState({
-  //         currentUser: response.data.email
-  //       })
-  //     } else {
-  //       that.setState({
-  //         currentUser: null
-  //       })
-  //     }
-  //   })
-  //   .catch(function(error){
-  //     console.log(error);
+  componentDidMount(){
+    const that = this;
+    const api_call = async() => { await axios.get("https://localhost:3000/api/v1/userless_auth")
+        .then(function(json) {
+          that.setState({
+            currentUser: json.data.currentUser
+          }, () => console.log(that.state.currentUser));
+        });
+      };
+
+    if (this.state.currentUser === null) {
+        api_call();
+    }
+  }
+  
+  // updateCurrentUser(email) {
+  //   this.setState({
+  //     currentUser: email
   //   })
   // }
-// updateCurrentUser(email) {
-//     this.setState({
-//       currentUser: email
-//     })
-//   }
 
   callApi = async () => {
     let that = this
@@ -51,8 +46,8 @@ class App extends Component {
       .then(function(json) {
         that.setState({
           results: json
-        })
-      })
+        });
+    });
   
     const results = that.state.results.data;
     // const data = await api_call.json();
@@ -74,18 +69,19 @@ class App extends Component {
     return (
       <Router>
       <div className="App">
+        <Navbar>
+          {/* <Navbar.Header> */}
+            <Navbar.Brand>
+                <NavLink to="/">Home</NavLink>
+                <NavLink to="/login">Log In</NavLink>
+                <NavLink to="/signup">Sign Up</NavLink>
+            </Navbar.Brand>
+          {/* </Navbar.Header> */}
+        </Navbar>
         <header className="App-header">
+          <h1>Droplet</h1>
           <img src={logo} className="App-logo" alt="logo" />
-         
-          Signup Form:
-          <Signup />
-
-          Other Options:
-
-          {/* <button href="/login">Sign Up</button> */}
           
-          <Route path="/login" component={Signup} />
-          <Route exact path="/" render={() => <button href="#" onClick={this.callApi}>Reddit Log In</button>} />
         </header>
       </div>
       </Router>
