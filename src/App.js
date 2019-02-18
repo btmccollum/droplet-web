@@ -8,17 +8,6 @@ import { connect } from 'react-redux';
 
 
 class App extends Component {
-  constructor(){
-    super();
-    this.state = {
-      // currentUser: null,
-      results: [],
-      currentUser: null
-    }
-    // this.updateCurrentUser = this.updateCurrentUser.bind(this);
-  }
-
-  
   componentDidMount(){
     const that = this;
     const api_call = async() => { await axios.get("https://localhost:3000/api/v1/userless_auth")
@@ -29,16 +18,10 @@ class App extends Component {
         });
       };
 
-    if (this.state.currentUser === null) {
+    if (this.props.userless === true) {
         api_call();
     }
   }
-  
-  // updateCurrentUser(email) {
-  //   this.setState({
-  //     currentUser: email
-  //   })
-  // }
 
   callApi = async () => {
     let that = this
@@ -58,11 +41,6 @@ class App extends Component {
     // <Route path='/authorize' component={() => { window.location = `www.google.com`}} />
 
     window.location.replace(`${results.url}${results.query_params}`)
-
-    console.log('hi')
-    // this.setState({
-    //   results: data
-    // });
   };
 
   render() {
@@ -89,4 +67,11 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    currentUser: state.user.currentUser,
+    userless: state.user.userless
+  }
+}
+
+export default connect(mapStateToProps)(App);
