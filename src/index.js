@@ -3,13 +3,11 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import "bootstrap/dist/css/bootstrap.css";
-import { BrowserRouter as Router, Switch, Route, Redirect, Link } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
-import Signup from './containers/Signup';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers/root_reducer';
+import { BrowserRouter as Router } from 'react-router-dom'
 
 const store = createStore(
     rootReducer,
@@ -22,10 +20,7 @@ const store = createStore(
 ReactDOM.render((
     <Provider store={store}>
         <Router>
-            <Switch>
-                <Route exact path = "/" component={ App } />
-                <Route path = "/signup" component={ Signup } />
-            </Switch>
+            <App />
         </Router>
     </Provider>), document.getElementById('root'));
     

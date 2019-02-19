@@ -3,6 +3,7 @@ export default function userReducer(state = { currentUser: {}, userless: true },
       case 'SET_USER':
         debugger;
         return { ...state, currentUser: action.payload, userless: false }
-      default: return state
+      default: 
+        return state;
     }
 }

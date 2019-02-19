@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.css';
 import axios from 'axios';
-import { BrowserRouter as Router, Route, Redirect, NavLink } from 'react-router-dom';
-import { Navbar } from 'react-bootstrap';
+import { Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
-
+import NavbarDisplay from './components/NavbarDisplay';
+import Signup from './containers/Signup';
 
 class App extends Component {
   componentDidMount(){
@@ -43,27 +43,30 @@ class App extends Component {
     window.location.replace(`${results.url}${results.query_params}`)
   };
 
+  showState = () => {
+    console.log(this.props.currentUser)
+  }
+
   render() {
     return (
-      <Router>
       <div className="App">
-        <Navbar>
-          {/* <Navbar.Header> */}
-            <Navbar.Brand>
-                <NavLink to="/">Home</NavLink>
-                <NavLink to="/login">Log In</NavLink>
-                <NavLink to="/signup">Sign Up</NavLink>
-            </Navbar.Brand>
-          {/* </Navbar.Header> */}
-        </Navbar>
+        <nav>
+          <NavbarDisplay />
+        </nav>
         <header className="App-header">
           <h1>Droplet</h1>
-          <img src={logo} className="App-logo" alt="logo" />
+          {/* <img src={logo} className="App-logo" alt="logo" /> */}
+          <button onClick={this.showState}>Show</button>
           
         </header>
+        
+        <div className="js-Content">
+          <Switch>
+              <Route path = "/signup" component={ Signup } />
+          </Switch>
+        </div>
       </div>
-      </Router>
-    );
+    )
   }
 }
 

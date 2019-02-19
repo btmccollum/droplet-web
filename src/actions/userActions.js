@@ -11,7 +11,6 @@ export const signupUser = (user, callback) => {
             type: 'SET_USER',
             payload: json.data.current
           });
-  
           callback()
         })
         .catch(err => err)
