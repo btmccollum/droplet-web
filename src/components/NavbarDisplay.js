@@ -1,36 +1,55 @@
-import React, { Component } from 'react';
-import { Nav, Navbar, NavDropdown, Form, FormControl, Button } from 'react-bootstrap';
+import React from 'react';
+// import { Nav, Navbar, NavDropdown, Form, FormControl, Button } from 'react-bootstrap';
+// import { LinkContainer } from 'react-router-bootstrap';
+import { NavLink } from 'react-router-dom';
 
-class NavbarDisplay extends Component {
+const linkStyle = {
+    width: '200px',
+    padding: '12px',
+    margin: '10px 6px 6px 10px',
+    background: '#a6a6a6',
+    textDecoration: 'none',
+    color: 'white'
+  }
+  
 
-
-    render () {
-        return (
-            <React.Fragment>
-                <Navbar bg="light" expand="lg">
-                    <Navbar.Brand href="/">Droplet</Navbar.Brand>
-                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                    <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav className="mr-auto">
-                        <Nav.Link href="/">Home</Nav.Link>
-                        <Nav.Link href="/signup">Sign Up</Nav.Link>
-                        <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                            <NavDropdown.Item href="/">Action</NavDropdown.Item>
-                            <NavDropdown.Item href="/">Another action</NavDropdown.Item>
-                            <NavDropdown.Item href="/">Something</NavDropdown.Item>
-                            <NavDropdown.Divider />
-                            <NavDropdown.Item href="/">Separated link</NavDropdown.Item>
-                        </NavDropdown>
-                        </Nav>
-                        <Form inline>
-                        <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                        <Button variant="outline-success">Search</Button>
-                        </Form>
-                    </Navbar.Collapse>
-                </Navbar>
-            </React.Fragment>
-        )
-    }
+const NavbarDisplay = () => {
+    return (
+        <div className="navbar">
+        <NavLink
+          to="/"
+          exact
+          style={linkStyle}
+          activeStyle={{
+            background: '#3333FF'
+          }}
+          >Droplet</NavLink>
+        <NavLink
+          to="/posts"
+          exact
+          style={linkStyle}
+          activeStyle={{
+            background: '#3333FF'
+          }}
+          >All Posts</NavLink>
+        <NavLink
+          to="/signup"
+          exact
+          style={linkStyle}
+          activeStyle={{
+            background: '#3333FF'
+          }}
+          >Signup</NavLink>
+          <NavLink
+          to="/logout"
+          exact
+          style={linkStyle}
+          activeStyle={{
+            background: '#3333FF'
+          }}
+          >Logout</NavLink>
+        </div>
+    )
 }
 
 export default NavbarDisplay;

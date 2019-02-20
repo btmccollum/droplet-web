@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { signupUser } from '../actions/userActions';
+import { withRouter, Link } from 'react-router-dom';
 
 class Signup extends Component {
     state = {
@@ -34,10 +35,10 @@ class Signup extends Component {
             <input type='password' name="password_confirmation" placeholder="Password Confirmation" value={ password_confirmation } onChange={ this.onChange }/><br/>
             <button type="submit">Signup</button>
           </form>
-          {/* <Link to='/login'>Log In</Link> */}
+          <Link to='/login'>Log In</Link>
         </React.Fragment>
       )
     }
 }
   
-export default connect(null, { signupUser })(Signup)
+export default connect(null, { signupUser })(Signup);

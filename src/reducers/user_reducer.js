@@ -1,8 +1,11 @@
-export default function userReducer(state = { currentUser: {}, userless: true }, action) {
+export default function userReducer(state = { currentUser: {} }, action) {
     switch(action.type) {
       case 'SET_USER':
-        debugger;
-        return { ...state, currentUser: action.payload, userless: false }
+        return { ...state, currentUser: action.payload }
+
+      case 'LOGOUT_USER':
+        return { ...state, currentUser: action.payload }
+
       default: 
         return state;
     }
