@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios';
 import { fetchPosts } from '../actions/postActions';
 
+const baseUrl = 'https://localhost:3000/api/v1';
 
 class Posts extends Component {
 
-    
+    componentDidMount() { 
+        this.props.fetchPosts();
+    }
 
     render() {
         return (

@@ -9,6 +9,7 @@ import Signup from './containers/Signup';
 import Posts from './containers/Posts';
 import { logoutUser } from './actions/userActions';
 import Login from './containers/Login';
+import Home from './components/Home';
 
 // Self executing function to ensure jwt is included in all axios requests when defined for auth on API
 (function() {
@@ -70,7 +71,7 @@ class App extends Component {
         <button onClick={this.linkRedditAccount}>Link My Reddit Account</button><br/>
         <span>Current User is {this.props.currentUser.email}</span><br/>
         <Switch>
-            <Route exact path ="/" component={ () => loggedIn() ? <Posts /> : <Redirect to="/login"/> }/>
+            <Route exact path ="/" component={ () => loggedIn() ? <Home /> : <Redirect to="/login"/> }/>
             <Route path = "/posts" component={ Posts } />
             <Route path='/signup' component={ () => loggedIn() ? <Redirect to="/"/> : <Signup /> }/>
             <Route path='/login' component={ () => loggedIn() ? <Redirect to="/"/> : <Login /> }/>
