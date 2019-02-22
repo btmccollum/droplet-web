@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchPosts } from '../actions/postActions';
 import PostList from '../components/Posts/PostList';
+import { Container, Row, Col, ButtonToolbar, ButtonGroup, DropdownButton, Dropdown, Button } from 'react-bootstrap';
+import DropdownMenu from 'react-bootstrap/DropdownMenu';
 
 const baseUrl = 'https://localhost:3000/api/v1';
 
@@ -23,12 +25,37 @@ class Posts extends Component {
             return (<span>Loading...</span> )
         }
     }
+    
+    sortPosts = () => {
+
+    }
 
     render() {
         return (
-            <div className="postListContainer">
-                {this.loadPosts()}
-            </div>
+            <React.Fragment>
+                <Container>
+                    <Row>
+                        <Col md={{ span: 8, offset: 2}}>
+                        <ButtonToolbar aria-label="Toolbar with sorting options">
+                        <ButtonGroup className="mr-12" aria-label="sorting options">
+                            <Button>1</Button>
+                            <Button>2</Button>
+                            <DropdownButton as={ButtonGroup} title="Dropdown" id="bg-nested-dropdown">
+                                <Dropdown.Item eventKey="1" onClick={() => this.sortPosts()}>Controversial</Dropdown.Item>
+                                <Dropdown.Item eventKey="2" onClick={() => this.sortPosts()}>Hot</Dropdown.Item>
+                                <Dropdown.Item eventKey="3" onClick={() => this.sortPosts()}>New</Dropdown.Item>
+                                <Dropdown.Item eventKey="4" onClick={() => this.sortPosts()}>Rising</Dropdown.Item>
+                                <Dropdown.Item eventKey="5" onClick={() => this.sortPosts()}>Top</Dropdown.Item>
+                            </DropdownButton>
+                            </ButtonGroup>
+                        </ButtonToolbar>
+                        </Col>
+                    </Row>
+                </Container>
+                <div className="postListContainer">
+                    {this.loadPosts()}
+                </div>
+            </React.Fragment>
         )
     }
 }

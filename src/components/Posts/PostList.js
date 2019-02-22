@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Post from './Post';
 import cuid from 'cuid';
+import { Container } from 'react-bootstrap';
 
 class PostList extends Component {
     render() {
@@ -9,9 +10,9 @@ class PostList extends Component {
         });
         
         return (
-            <div>
+            <Container>
                 {postList}
-            </div>
+            </Container>
         )
     }
 }

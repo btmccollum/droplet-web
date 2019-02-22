@@ -4,12 +4,12 @@ import 'bootstrap/dist/css/bootstrap.css';
 import axios from 'axios';
 import { Switch, Route, withRouter, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import NavbarDisplay from './components/NavbarDisplay';
 import Signup from './containers/Signup';
 import Posts from './containers/Posts';
 import { logoutUser } from './actions/userActions';
 import Login from './containers/Login';
 import Home from './components/Home';
+import SidebarMenu from './components/Menu';
 
 // Self executing function to ensure jwt is included in all axios requests when defined for auth on API
 (function() {
@@ -65,7 +65,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <NavbarDisplay />
+        <SidebarMenu />
         <button onClick={() => console.log(sessionStorage.getItem('jwt'))}>Log JWT</button><br/>
         <button onClick={this.postFetch}>Passing JWT Test</button><br/>
         <button onClick={this.linkRedditAccount}>Link My Reddit Account</button><br/>
