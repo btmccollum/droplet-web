@@ -10,19 +10,11 @@ import { logoutUser } from './actions/userActions';
 import Login from './containers/Login';
 import Home from './components/Home';
 import SidebarMenu from './components/Menu';
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { fab } from '@fortawesome/free-brands-svg-icons'
+import { faHome, faImages, faSignInAlt, faSignOutAlt, faUserPlus } from '@fortawesome/free-solid-svg-icons'
 
-// Self executing function to ensure jwt is included in all axios requests when defined for auth on API
-(function() {
-  let token = sessionStorage.getItem('jwt');
-  if (token) {
-    console.log('set token')
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-  } 
-  else {
-    console.log('null token')
-      axios.defaults.headers.common['Authorization'] = null;
-  }
-}());
+library.add(fab, faHome, faImages, faSignInAlt, faSignOutAlt, faUserPlus)
 
 class App extends Component {
 
