@@ -73,17 +73,3 @@ export const logoutUser = () => {
   })
   }
 }   
-
-// export const setUserless = () => {
-//   return dispatch => {
-//     axios.get("https://localhost:3000/api/v1/userless_auth")
-//       .then(json => {
-//         debugger;
-//         // sessionStorage.setItem('userless', json.data.currentUser.access_token)
-//         dispatch({
-//           type: 'SET_USERLESS',
-//           payload: json.data.currentUser
-//         }, () => console.log(json.data.currentUser))
-//       })
-//   }
-// }

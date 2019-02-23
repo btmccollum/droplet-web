@@ -3,9 +3,6 @@ import { connect } from 'react-redux';
 import { fetchPosts } from '../actions/postActions';
 import PostList from '../components/Posts/PostList';
 import { Container, Row, Col, ButtonToolbar, ButtonGroup, DropdownButton, Dropdown, Button } from 'react-bootstrap';
-import DropdownMenu from 'react-bootstrap/DropdownMenu';
-
-const baseUrl = 'https://localhost:3000/api/v1';
 
 class Posts extends Component {
 
@@ -24,10 +21,6 @@ class Posts extends Component {
         else {
             return (<span>Loading...</span> )
         }
-    }
-    
-    sortPosts = () => {
-
     }
 
     render() {

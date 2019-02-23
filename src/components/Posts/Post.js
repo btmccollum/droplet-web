@@ -1,35 +1,67 @@
-import React from 'react'
-import { Row, Col } from 'react-bootstrap';
+// import React from 'react'
+import React, { Component } from 'react';
+import { Modal, Row, Col, Button } from 'react-bootstrap';
 
-const Post = props => {
-    const details = props.post
-    const pStyle = {
-        backgroundColor: 'rgb(26, 26, 27)',
-        maxHeight: '512 px', 
-        margin: '0px auto'
+class Post extends Component {
+    constructor(props, context) {
+        super(props, context);
+    
+        this.handleShow = this.handleShow.bind(this);
+        this.handleClose = this.handleClose.bind(this);
+    
+        this.state = {
+          show: false,
+        };
+      }
+    
+      handleClose() {
+        this.setState({ show: false });
+      }
+    
+      handleShow() {
+        this.setState({ show: true });
+      }
+    
+      render() {
+        const details = this.props.post
+
+        return (
+          <React.Fragment>
+            <Row>
+                 <Col md={{ span: 10, offset: 1 }} className="postCol">
+                     <div className="postContainer" onClick={this.handleShow}>
+                     <Row className="postTitleAndCreds">
+                         <Col className="bodyContainer">
+                            <span className="postTitle">{details.title}</span><br/>
+                            <span className="postCreds">Created by u/{details.author}</span><br/>
+                         </Col>
+                         <Col className="imgContainer">
+                            <p className="postPreview"><img src={details.thumbnail} /></p>
+                        </Col>
+                     </Row>
+                     <Row>
+                        <span className="postCommentCount">Comments: {details.num_comments}</span>
+                     </Row>
+                     </div>
+                 </Col>
+             </Row>
+
+            <Modal 
+                show={this.state.show} 
+                onHide={this.handleClose}
+                dialogClassName="modal-90w"
+                size="lg"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title>{details.title}</Modal.Title>
+                </Modal.Header>
+                <Modal.Body><img src={details.url} /></Modal.Body>
+            </Modal>
+          </React.Fragment>
+        )
+      }
     }
-
-    return (
-        <Row>
-            <Col md={{ span: 8, offset: 2 }} className="postCol">
-                <div className="postContainer">
-                <h5 className="postTitle">{details.title}</h5>
-                <Row>
-                    <Col md={{ span: 10 }}><p className="postPreview"><img src={details.thumbnail} style={pStyle}/></p></Col>
-                </Row>
-                
-                <Row>
-                <Col md={{ span: 4 }}>
-                <span className="postCommentCount">Comments: {details.num_comments}</span>
-                </Col>
-                <Col md={{ span: 8 }}>
-                    <span className="postCreds"> Created by u/{details.author} </span>
-                </Col>
-                </Row>
-                </div>
-            </Col>
-        </Row>
-    )
-}
 
 export default Post;
