@@ -1,6 +1,7 @@
 // import React from 'react'
 import React, { Component } from 'react';
 import { Modal, Row, Col, Button } from 'react-bootstrap';
+import Comments from '../../containers/Comments';
 
 class Post extends Component {
     constructor(props, context) {
@@ -57,7 +58,10 @@ class Post extends Component {
                 <Modal.Header closeButton>
                     <Modal.Title>{details.title}</Modal.Title>
                 </Modal.Header>
-                <Modal.Body><img src={details.url} /></Modal.Body>
+                <Modal.Body>
+                  <img src={details.url} />
+                  <Comments post={details}/>  
+                </Modal.Body>
             </Modal>
           </React.Fragment>
         )
