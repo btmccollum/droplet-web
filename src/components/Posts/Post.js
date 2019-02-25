@@ -1,8 +1,9 @@
 // import React from 'react'
 import React, { Component } from 'react';
-import { Modal, Row, Col, Button } from 'react-bootstrap';
+import { Modal, Container, Row, Col, Button } from 'react-bootstrap';
 import Comments from '../../containers/Comments';
 import { bindActionCreators } from 'redux';
+import ReactPlayer from 'react-player';
 
 class Post extends Component {
     constructor(props, context) {
@@ -24,19 +25,35 @@ class Post extends Component {
         this.setState({ show: true });
       }
 
-      // determineContentToLoad = () => {
-      //   const details = this.props.post
-      //   debugger;
-      //   if (details.preview !== undefined && details.preview.reddit_video_preview) {
-      //     return <img src={details.preview.images[0].source.url} />
-      //   }
-      //   else if (details !== undefined && details.url !== undefined ) {
-      //     return <img src={details.url} />
-      //   }
-      //   else {
-      //     return 'hi'
-      //   }
-      // }
+      determineContentToLoad = () => {
+        const details = this.props.post
+        if (details.preview !== undefined && details.preview.reddit_video_preview) {
+          return (
+            <ReactPlayer 
+              url={details.preview.reddit_video_preview.fallback_url} 
+              playing 
+              loop
+              config={{ 
+                forceDASH: true,
+                forceHLS: true 
+              }}  
+            />
+          )
+        } else if (details.thumbnail === 'self') { 
+          return <img src={process.env.PUBLIC_URL + '45332556-wassertropfen-umriss-symbol-modern-minimal-flache-design-stil-vektor-illustration.jpg'} />
+        } else {
+          return <img src={details.url} />
+        }
+      }
+
+      findThumbnail = () => {
+        const details = this.props.post
+        if (details.thumbnail === 'self' || details.thumbnail === 'default') {
+          return <img className="postThumbnail" src={process.env.PUBLIC_URL + '45332556-wassertropfen-umriss-symbol-modern-minimal-flache-design-stil-vektor-illustration.jpg'} />
+        } else {
+          return <img className="postThumbnail" src={details.thumbnail} />
+        }
+      }
     
       render() {
         const details = this.props.post
@@ -52,7 +69,7 @@ class Post extends Component {
                             <span className="postCreds">Created by u/{details.author}</span><br/>
                          </Col>
                          <Col className="imgContainer">
-                            <p className="postPreview"><img src={details.thumbnail} /></p>
+                            <p className="postPreview">{this.findThumbnail()}</p>
                         </Col>
                      </Row>
                      <Row>
@@ -71,11 +88,18 @@ class Post extends Component {
                 centered
             >
                 <Modal.Header closeButton>
-                    <Modal.Title>{details.title}</Modal.Title>
+                <Container>
+                  <Row>
+                    <Col className="modalTitle" md={{ span: 12 }}>
+                    <Modal.Title><h5>{details.title}</h5></Modal.Title>
+                    </Col>
+                    <Col className="modalContent" md={{ span: 12 }}>
+                    <p>{this.determineContentToLoad()}</p>
+                    </Col>
+                  </Row>
+                  </Container>
                 </Modal.Header>
                 <Modal.Body>
-                  <img src="https://gfycat.com/acrobaticcheerfulhind" />
-                  {/* {this.determineContentToLoad()} */}
                   <Comments post={details}/>  
                 </Modal.Body>
             </Modal>

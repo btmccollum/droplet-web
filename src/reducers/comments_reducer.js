@@ -4,7 +4,6 @@ function commentsReducer(state = { comments: [], loading: false }, action) {
             return { ...state, loading: true };
 
         case "FETCH_COMMENTS":
-        debugger;
             return { loading: false, comments: action.payload };
             
         default:
