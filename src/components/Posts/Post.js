@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { Modal, Row, Col, Button } from 'react-bootstrap';
 import Comments from '../../containers/Comments';
+import { bindActionCreators } from 'redux';
 
 class Post extends Component {
     constructor(props, context) {
@@ -22,6 +23,20 @@ class Post extends Component {
       handleShow() {
         this.setState({ show: true });
       }
+
+      // determineContentToLoad = () => {
+      //   const details = this.props.post
+      //   debugger;
+      //   if (details.preview !== undefined && details.preview.reddit_video_preview) {
+      //     return <img src={details.preview.images[0].source.url} />
+      //   }
+      //   else if (details !== undefined && details.url !== undefined ) {
+      //     return <img src={details.url} />
+      //   }
+      //   else {
+      //     return 'hi'
+      //   }
+      // }
     
       render() {
         const details = this.props.post
@@ -59,7 +74,8 @@ class Post extends Component {
                     <Modal.Title>{details.title}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                  <img src={details.url} />
+                  <img src="https://gfycat.com/acrobaticcheerfulhind" />
+                  {/* {this.determineContentToLoad()} */}
                   <Comments post={details}/>  
                 </Modal.Body>
             </Modal>

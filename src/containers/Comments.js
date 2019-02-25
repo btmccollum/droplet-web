@@ -1,28 +1,33 @@
 import React, { Component } from 'react';
+import cuid from 'cuid';
 import { connect } from 'react-redux';
 import { fetchComments } from '../actions/commentActions';
-import PostList from '../components/Posts/PostList';
-import { Container, Row, Col, ButtonToolbar, ButtonGroup, DropdownButton, Dropdown, Button } from 'react-bootstrap';
+import Comment from '../components/Comment';
 
 class Comments extends Component {
     componentDidMount() { 
         this.props.fetchComments(this.props.post);
     }
+
+    componentDidUpdate() {
+        this.loadComments()
+    }
     
-    // loadComments = () => {
-    //     if (this.props.comments.length > 0) {
-    //         return (<CommentList comments={this.props.comments}/>)
-    //     }
-    //     else {
-    //         return (<span>Loading...</span> )
-    //     }
-    // }
+    loadComments = () => {
+        if (this.props.comments.length > 0) {
+            // return (<CommentList comments={this.props.comments}/>)
+            return this.props.comments.map(comment => <Comment key={cuid()} details={comment} /> )
+        }
+        else {
+            return (<span>Loading...</span> )
+        }
+    }
+
 
     render() {
         return (
             <div>
-                {/* <CommentList /> */}
-                
+                {this.loadComments()}
             </div>
         )
     }
@@ -30,7 +35,7 @@ class Comments extends Component {
 
 const mapStateToProps = state => {
     return {
-        comments: state.comments
+        comments: state.comments.comments
     }
 }
 

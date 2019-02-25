@@ -17,8 +17,7 @@ export function fetchComments(post) {
         dispatch({ type: "LOADING_COMMENTS" });
         return axios.get(`${baseUrl}/fetch_comments`, data)
             .then(response => {
-                debugger;
-                // dispatch({ type: "FETCH_Comments", payload: response.data.posts.data.children })
+                dispatch({ type: "FETCH_COMMENTS", payload: response.data.comments[1].data.children })
             })
     }
 }

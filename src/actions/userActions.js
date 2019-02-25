@@ -49,20 +49,15 @@ export const loginUser = (user, callback) => {
 }
 
 export const logoutUser = () => {
-  let data = { 
-    headers: {
-      Authorization: `Bearer ${sessionStorage.getItem('jwt')}`
-    },
-    jwt: sessionStorage.getItem('jwt') 
-  }
+  axios.defaults.headers.common['Authorization'] = null;
+
+  if (sessionStorage['jwt']) { sessionStorage.removeItem('jwt') }
+
+  sessionStorage.setItem('logged_in', '')
   
   return dispatch => {
-    axios.post(`${baseUrl}/logout`, data)
+    axios.post(`${baseUrl}/logout`)
       .then(resp => {
-        sessionStorage.setItem('logged_in', '')
-        if (sessionStorage['jwt']) { sessionStorage.removeItem('jwt') }
-        axios.defaults.headers.common['Authorization'] = null;
-
         dispatch({
           type: 'LOGOUT_USER',
           payload: ''

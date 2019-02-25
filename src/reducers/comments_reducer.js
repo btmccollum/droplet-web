@@ -1,9 +1,10 @@
 function commentsReducer(state = { comments: [], loading: false }, action) {
     switch(action.type) {
-        case "LOADING_POSTS":
+        case "LOADING_COMMENTS":
             return { ...state, loading: true };
 
-        case "FETCH_POSTS":
+        case "FETCH_COMMENTS":
+        debugger;
             return { loading: false, comments: action.payload };
             
         default:
