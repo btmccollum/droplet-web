@@ -12,9 +12,9 @@ import Home from './components/Home';
 import SidebarMenu from './components/Menu';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
-import { faHome, faImages, faSignInAlt, faSignOutAlt, faUserPlus } from '@fortawesome/free-solid-svg-icons'
+import { faHome, faImages, faSignInAlt, faSignOutAlt, faUserPlus, faCommentAlt } from '@fortawesome/free-solid-svg-icons'
 
-library.add(fab, faHome, faImages, faSignInAlt, faSignOutAlt, faUserPlus)
+library.add(fab, faHome, faImages, faSignInAlt, faSignOutAlt, faUserPlus, faCommentAlt)
 
 class App extends Component {
 
@@ -58,10 +58,7 @@ class App extends Component {
     return (
       <div className="App">
         <SidebarMenu />
-        <button onClick={() => console.log(sessionStorage.getItem('jwt'))}>Log JWT</button><br/>
-        <button onClick={this.postFetch}>Passing JWT Test</button><br/>
         <button onClick={this.linkRedditAccount}>Link My Reddit Account</button><br/>
-        <span>Current User is {this.props.currentUser.email}</span><br/>
         <Switch>
             <Route exact path ="/" component={ () => loggedIn() ? <Home /> : <Redirect to="/login"/> }/>
             <Route path = "/posts" component={ Posts } />

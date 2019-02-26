@@ -4,6 +4,7 @@ import { Modal, Container, Row, Col, Button } from 'react-bootstrap';
 import Comments from '../../containers/Comments';
 import { bindActionCreators } from 'redux';
 import ReactPlayer from 'react-player';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class Post extends Component {
     constructor(props, context) {
@@ -27,6 +28,7 @@ class Post extends Component {
 
       determineContentToLoad = () => {
         const details = this.props.post
+        
         if (details.preview !== undefined && details.preview.reddit_video_preview) {
           return (
             <ReactPlayer 
@@ -48,6 +50,7 @@ class Post extends Component {
 
       findThumbnail = () => {
         const details = this.props.post
+
         if (details.thumbnail === 'self' || details.thumbnail === 'default') {
           return <img className="postThumbnail" src={process.env.PUBLIC_URL + '45332556-wassertropfen-umriss-symbol-modern-minimal-flache-design-stil-vektor-illustration.jpg'} />
         } else {
@@ -64,16 +67,20 @@ class Post extends Component {
                  <Col md={{ span: 10, offset: 1 }} className="postCol">
                      <div className="postContainer" onClick={this.handleShow}>
                      <Row className="postTitleAndCreds">
-                         <Col className="bodyContainer">
+                         <Col className="bodyContainer" md={{ span: 10 }}>
                             <span className="postTitle">{details.title}</span><br/>
                             <span className="postCreds">Created by u/{details.author}</span><br/>
+                            {/* <span className="postCommentCount">Comments: {details.num_comments}</span> */}
                          </Col>
-                         <Col className="imgContainer">
+                         
+                         <Col className="imgContainer" md={{ span: 2}}>
                             <p className="postPreview">{this.findThumbnail()}</p>
                         </Col>
                      </Row>
                      <Row>
-                        <span className="postCommentCount">Comments: {details.num_comments}</span>
+                        <Col className="postFooter">
+                          <span className="postCommentCount"><FontAwesomeIcon icon="comment-alt" /> {details.num_comments}</span>
+                        </Col>
                      </Row>
                      </div>
                  </Col>
@@ -91,10 +98,10 @@ class Post extends Component {
                 <Container>
                   <Row>
                     <Col className="modalTitle" md={{ span: 12 }}>
-                    <Modal.Title><h5>{details.title}</h5></Modal.Title>
+                      <Modal.Title><h5>{details.title}</h5></Modal.Title>
                     </Col>
                     <Col className="modalContent" md={{ span: 12 }}>
-                    <p>{this.determineContentToLoad()}</p>
+                      <p>{this.determineContentToLoad()}</p>
                     </Col>
                   </Row>
                   </Container>

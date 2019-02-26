@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Comment = props => {
-    const comment = props.details.data;
+    const comment = props.comment;
 
     return (
         <p>{comment.author}: {comment.body}</p>

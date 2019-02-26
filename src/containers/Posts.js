@@ -5,7 +5,6 @@ import PostList from '../components/Posts/PostList';
 import { Container, Row, Col, ButtonToolbar, ButtonGroup, DropdownButton, Dropdown, Button } from 'react-bootstrap';
 
 class Posts extends Component {
-
     componentDidMount() { 
         this.props.fetchPosts();
     }

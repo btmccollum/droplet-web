@@ -189,16 +189,29 @@ Note: Beware of modifying this element as it can break the animations - you shou
 }
 
 .postThumbnail {
-  /* max-height: 105px;
-  max-width: 140px;
-  display: flex;
-  flex-wrap: wrap; */
-  /* height: 105px;
-  width: 140px; */
   width: 100px;
 }
 
 .postThumbnail img{
   width: auto;
   height: 65px;
+}
+
+.modalHeader {
+  text-align: center;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.modalBody {
+  border-top: .5px solid rgb(52, 53, 54) !important;
+  padding-top: 2.5%;
+}
+
+.homepageContainer {
+  text-align: center;
+}
+
+.postCommentCount {
+  padding-left: .5%;
 }
