@@ -5,7 +5,7 @@ const SubredditCard = props => {
     const subreddit = props.subreddit;
 
     return (
-        <Col md={{ span: 4 }}>
+        <Col md={{ span: 4, offset: 0 }} className="">
             <Card className="subredditCard">
                 <Card.Img variant="top" src={subreddit.icon_img ? subreddit.icon_img : process.env.PUBLIC_URL + '45332556-wassertropfen-umriss-symbol-modern-minimal-flache-design-stil-vektor-illustration.jpg'} />
                 <Card.Body>

@@ -1,8 +1,6 @@
-// import React from 'react'
 import React, { Component } from 'react';
-import { Modal, Container, Row, Col, Button } from 'react-bootstrap';
+import { Modal, Container, Row, Col } from 'react-bootstrap';
 import Comments from '../../containers/Comments';
-import { bindActionCreators } from 'redux';
 import ReactPlayer from 'react-player';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 

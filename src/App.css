@@ -239,6 +239,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
   bottom: 2%;
   left: 1.5%;
   margin-bottom: .25%;
+  font-size: .8em;
 }
 
 .modalHeader {
@@ -270,10 +271,15 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
 /* ------------ SUBREDDITS CARD DISPLAY ---------------- */
 
+.subredditCardCol {
+  align-items: center !important;
+  justify-content: center !important;
+}
+
 .subredditCard.card{
   background-color: rgb(43, 43, 44);
   border-top: 1px solid rgb(52, 53, 54);
-  width: 15rem !important;
+  width: 20rem !important;
   display: flex;
   align-items: stretch;
   margin-top: 2%;
