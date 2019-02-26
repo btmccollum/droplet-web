@@ -12,9 +12,9 @@ import Home from './components/Home';
 import SidebarMenu from './components/Menu';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
-import { faHome, faImages, faSignInAlt, faSignOutAlt, faUserPlus, faCommentAlt } from '@fortawesome/free-solid-svg-icons'
+import { faHome, faImages, faSignInAlt, faSignOutAlt, faUserPlus, faCommentAlt, faArrowAltCircleUp, faMedal, faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons'
 
-library.add(fab, faHome, faImages, faSignInAlt, faSignOutAlt, faUserPlus, faCommentAlt)
+library.add(fab, faHome, faImages, faSignInAlt, faSignOutAlt, faUserPlus, faCommentAlt, faArrowAltCircleUp, faMedal, faExternalLinkAlt)
 
 class App extends Component {
 
