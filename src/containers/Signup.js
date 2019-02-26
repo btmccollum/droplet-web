@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { signupUser } from '../actions/userActions';
 import { Link } from 'react-router-dom';
 
