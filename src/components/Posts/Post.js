@@ -25,7 +25,7 @@ class Post extends Component {
   }
 
   determineContentToLoad = () => {
-    const details = this.props.post
+    const details = this.props.post;
     
     if (details.preview !== undefined && details.preview.reddit_video_preview) {
       return (
@@ -47,7 +47,7 @@ class Post extends Component {
   }
 
   findThumbnail = () => {
-    const details = this.props.post
+    const details = this.props.post;
 
     if (details.thumbnail === 'self' || details.thumbnail === 'default') {
       return <img className="postThumbnail" src={process.env.PUBLIC_URL + '45332556-wassertropfen-umriss-symbol-modern-minimal-flache-design-stil-vektor-illustration.jpg'} />
@@ -57,13 +57,13 @@ class Post extends Component {
   }
 
   sumGildings = () => {
-    const details = this.props.post
+    const details = this.props.post;
 
     return Object.values(details.gildings).reduce((a,b) => a + b)
   }
 
   render() {
-    const details = this.props.post
+    const details = this.props.post;
 
     return (
       <React.Fragment>
@@ -72,7 +72,7 @@ class Post extends Component {
             <Col md={{ span: 9 }} >
               <Row className="postTitleAndCreds" onClick={this.handleShow}>
                   <Col className="bodyContainer">
-                    <span className="postTitle">{details.title} <a href={details.url} className="ellipses" target="_blank"><span>{details.url}</span><FontAwesomeIcon icon="external-link-alt" /></a></span><br/>
+                    <span className="postTitle">{details.title} <a href={details.url} className="ellipses" target="_blank" rel="noopener"><span>{details.url}</span><FontAwesomeIcon icon="external-link-alt" /></a></span><br/>
                     <span className="postCreds"> {details.subreddit_name_prefixed} - Posted by u/{details.author}</span><br/>
                   </Col>
               </Row>
