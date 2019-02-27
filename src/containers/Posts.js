@@ -6,7 +6,8 @@ import { Container, Row, Col, ButtonToolbar, ButtonGroup, DropdownButton, Dropdo
 
 class Posts extends Component {
     componentDidMount() { 
-        this.props.fetchPosts();
+        // debugger;
+        this.props.fetchPosts(this.props.feed);
     }
 
     componentDidUpdate() {
@@ -33,11 +34,11 @@ class Posts extends Component {
                             <Button>1</Button>
                             <Button>2</Button>
                             <DropdownButton as={ButtonGroup} title="Dropdown" id="bg-nested-dropdown">
-                                <Dropdown.Item eventKey="1" onClick={() => this.sortPosts()}>Controversial</Dropdown.Item>
-                                <Dropdown.Item eventKey="2" onClick={() => this.sortPosts()}>Hot</Dropdown.Item>
-                                <Dropdown.Item eventKey="3" onClick={() => this.sortPosts()}>New</Dropdown.Item>
-                                <Dropdown.Item eventKey="4" onClick={() => this.sortPosts()}>Rising</Dropdown.Item>
-                                <Dropdown.Item eventKey="5" onClick={() => this.sortPosts()}>Top</Dropdown.Item>
+                                <Dropdown.Item eventKey="1" onClick={() => this.fetchPosts('controversial')}>Controversial</Dropdown.Item>
+                                <Dropdown.Item eventKey="2" onClick={() => this.fetchPosts('hot')}>Hot</Dropdown.Item>
+                                <Dropdown.Item eventKey="3" onClick={() => this.fetchPosts('new')}>New</Dropdown.Item>
+                                <Dropdown.Item eventKey="4" onClick={() => this.fetchPosts('rising')}>Rising</Dropdown.Item>
+                                <Dropdown.Item eventKey="5" onClick={() => this.fetchPosts('top')}>Top</Dropdown.Item>
                             </DropdownButton>
                             </ButtonGroup>
                         </ButtonToolbar>
@@ -54,7 +55,8 @@ class Posts extends Component {
 
 const mapStateToProps = state => {
     return {
-        posts: state.posts.posts
+        posts: state.posts.posts,
+        feed: state.user.feed
     }
 }
 

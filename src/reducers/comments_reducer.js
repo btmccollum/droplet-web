@@ -4,7 +4,10 @@ function commentsReducer(state = { comments: [], loading: false }, action) {
             return { ...state, loading: true };
 
         case "FETCH_COMMENTS":
-            return { loading: false, comments: action.payload };
+            return { ...state, loading: false, comments: action.payload };
+
+        case "REMOVE_COMMENTS":
+            return { ...state, comments: []}
             
         default:
             return state;

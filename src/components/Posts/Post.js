@@ -112,7 +112,7 @@ class Post extends Component {
               </Row>
               </Container>
             </Modal.Header>
-            <Modal.Body>
+            <Modal.Body className="modalBody">
               <Comments post={details}/>  
             </Modal.Body>
         </Modal>

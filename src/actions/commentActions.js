@@ -21,3 +21,9 @@ export function fetchComments(post) {
             })
     }
 }
+
+export function clearComments() {
+    return dispatch => {
+        dispatch({ type: "REMOVE_COMMENTS" })
+    }
+}

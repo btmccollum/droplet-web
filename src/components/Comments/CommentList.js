@@ -10,7 +10,7 @@ class CommentList extends Component {
         });
         
         return (
-            <Container>
+            <Container className="commentList">
                 {commentList}
             </Container>
         )
