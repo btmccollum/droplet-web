@@ -11,7 +11,7 @@ const SubredditCard = props => {
                 <Card.Body>
                     <Card.Title>{subreddit.display_name_prefixed}</Card.Title>
                     <Card.Text>{subreddit.public_description}</Card.Text>
-                    <Button variant="primary">Add To Feed</Button>
+                    <Button variant="primary" onClick={() => props.addToUserFeed(subreddit.display_name)}>Add To Feed</Button>
                 </Card.Body>
             </Card>
         </Col>

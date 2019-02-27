@@ -16,7 +16,7 @@ import { CardColumns } from 'react-bootstrap';
 // }
 
 const SubredditCardList = props => {
-    const subredditList = props.subreddits.map(subreddit => <SubredditCard key={cuid()} subreddit={subreddit.data} />)
+    const subredditList = props.subreddits.map(subreddit => <SubredditCard key={cuid()} subreddit={subreddit.data} addToUserFeed={props.addToUserFeed}/>)
 
     return (
         <CardColumns className="subredditCards mx-auto">
