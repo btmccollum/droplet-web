@@ -8,10 +8,12 @@ export const signupUser = (user, callback) => {
     const data = {
       body: JSON.stringify({ user })
     }
+    axios.defaults.headers.common['Authorization'] = null;
 
     return dispatch => {
       axios.post(`${ baseUrl }/users`, data)
         .then(json => {
+          debugger;
           sessionStorage.setItem('logged_in', 'true')
           sessionStorage.setItem('jwt', json.data.jwt)
           sessionStorage.setItem('preference_setting', json.data.preferences)
@@ -34,10 +36,11 @@ export const loginUser = (user, callback) => {
   return dispatch => {
     axios.post(`${ baseUrl }/auth`, data)
       .then(user => {
+        debugger;
         sessionStorage.setItem('logged_in', 'true')
         sessionStorage.setItem('jwt', user.data.jwt)
         sessionStorage.setItem('preference_setting', user.data.preference_setting)
-
+        
         dispatch({
           type: 'SET_USER',
           payload: user.data.current
@@ -64,6 +67,7 @@ export const linkRedditAccount = () => {
         .then(json => {
           window.location = `${json.url}${json.query_params}`
         })
+        .catch(console.error)
   }
 }
 
@@ -96,11 +100,10 @@ export const authenticateUser = () => {
     dispatch({ type: "LOADING_USER_INFO"})
     axios.get(`${baseUrl}/load_user`)
       .then( resp => {
-        debugger;
-        // dispatch({
-        //   type: 'AUTHENTICATE_USER',
-        //   payload: resp.data
-        // })
+        dispatch({
+          type: 'AUTHENTICATE_USER',
+          payload: resp.data
+        })
       })
   }
 }

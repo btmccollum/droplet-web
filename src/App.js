@@ -18,13 +18,6 @@ import { faHome, faImages, faSignInAlt, faSignOutAlt, faUserPlus, faCommentAlt, 
 
 library.add(fab, faHome, faImages, faSignInAlt, faSignOutAlt, faUserPlus, faCommentAlt, faArrowAltCircleUp, faMedal, faExternalLinkAlt, faUserCircle)
 
-// const token = sessionStorage.getItem('jwt');
-
-// if (token) {
-//     debugger;
-//     authenticateUser();
-// }
-
 class App extends Component {
   showState = () => {
     console.log(this.props.currentUser)

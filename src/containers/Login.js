@@ -6,8 +6,8 @@ import { loginUser } from '../actions/userActions';
 
 class Login extends Component {
     state = {
-      email: 'demo',
-      password: 'password'
+      email: '',
+      password: ''
     }
     
   handleOnChange = event => {

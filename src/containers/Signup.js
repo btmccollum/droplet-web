@@ -25,10 +25,12 @@ class Signup extends Component {
   
     render() {
       const { email, password, password_confirmation } = this.state
+      let test = sessionStorage.getItem('jwt')
   
       return (
         <React.Fragment>
           <h1>Sign Up</h1>
+          <button onClick={console.log(test)}>JWT</button>
           <form onSubmit={ this.handleOnSubmit }>
             <input name="email" placeholder="Email" value={ email } onChange={ this.handleOnChange }/><br/>
             <input type='password' name="password" placeholder="Password" value={ password } onChange={ this.handleOnChange }/><br/>
