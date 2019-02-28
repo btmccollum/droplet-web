@@ -3,6 +3,8 @@ import { Modal, Container, Row, Col } from 'react-bootstrap';
 import Comments from '../../containers/Comments';
 import ReactPlayer from 'react-player';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import ReactHtmlParser from 'react-html-parser';
+
 
 class Post extends Component {
   constructor(props, context) {
@@ -26,8 +28,14 @@ class Post extends Component {
 
   determineContentToLoad = () => {
     const details = this.props.post;
-    
-    if (details.preview !== undefined && details.preview.reddit_video_preview) {
+    if (Object.keys(details.media_embed).length !== 0) {
+      function htmlDecode(input){
+        var doc = new DOMParser().parseFromString(input, "text/html");
+        return doc.documentElement.textContent;
+      }
+      
+       return ReactHtmlParser(htmlDecode(details.media.oembed.html))
+    } else if (details.preview !== undefined && details.preview.reddit_video_preview) {
       return (
         <ReactPlayer 
           url={details.preview.reddit_video_preview.fallback_url} 
@@ -39,21 +47,44 @@ class Post extends Component {
           }}  
         />
       )
+    } else if (!!details.preview && details.media !== null && details.media.reddit_video !== undefined) {
+      return (
+        <ReactPlayer 
+          url={details.media.reddit_video.fallback_url} 
+          playing 
+          loop
+          config={{ 
+            forceDASH: true,
+            forceHLS: true 
+          }}  
+        />
+      )
+    } else if (!!details.selftext) {
+      return <span>{details.selftext}</span>
     } else if (details.thumbnail === 'self') { 
       return <img src={process.env.PUBLIC_URL + '45332556-wassertropfen-umriss-symbol-modern-minimal-flache-design-stil-vektor-illustration.jpg'} />
-    } else {
+    } else if (details.post_hint === 'image') {
       return <img src={details.url} />
+    } else {
+      return <a href={details.url}>{details.url}</a>
     }
   }
 
   findThumbnail = () => {
     const details = this.props.post;
+    let thumbnail;
 
     if (details.thumbnail === 'self' || details.thumbnail === 'default') {
-      return <img className="postThumbnail" src={process.env.PUBLIC_URL + '45332556-wassertropfen-umriss-symbol-modern-minimal-flache-design-stil-vektor-illustration.jpg'} />
-    } else {
-      return <img className="postThumbnail" src={details.thumbnail} />
+      thumbnail = process.env.PUBLIC_URL + '45332556-wassertropfen-umriss-symbol-modern-minimal-flache-design-stil-vektor-illustration.jpg'
+    } 
+    else if (details.thumbnail === "" && !details.secure_media.thumbnail_url) {
+      thumbnail = details.secure_media.thumbnail_url
     }
+    else {
+      thumbnail = details.thumbnail
+    }
+
+    return ( <img className="postThumbnail" src={thumbnail} /> )
   }
 
   sumGildings = () => {

@@ -17,7 +17,6 @@ import { faHome, faImages, faSignInAlt, faSignOutAlt, faUserPlus, faCommentAlt, 
 library.add(fab, faHome, faImages, faSignInAlt, faSignOutAlt, faUserPlus, faCommentAlt, faArrowAltCircleUp, faMedal, faExternalLinkAlt, faUserCircle)
 
 class App extends Component {
-
   showState = () => {
     console.log(this.props.currentUser)
   }

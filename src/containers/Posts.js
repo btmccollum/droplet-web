@@ -6,7 +6,6 @@ import { Container, Row, Col, ButtonToolbar, ButtonGroup, DropdownButton, Dropdo
 
 class Posts extends Component {
     componentDidMount() { 
-        // debugger;
         this.props.fetchPosts(this.props.feed);
     }
 
