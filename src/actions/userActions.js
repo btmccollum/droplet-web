@@ -75,6 +75,26 @@ export const logoutUser = () => {
   }
 }   
 
+export const authenticateUser = () => {
+  let data = { 
+    headers: {
+        Authorization: `Bearer ${sessionStorage.getItem('jwt')}`
+    }
+  };
+  debugger;
+  return dispatch => {
+    dispatch({ type: "LOADING_USER_INFO"})
+    axios.get(`${baseUrl}/load_user`, data)
+      .then( resp => {
+        debugger;
+        // dispatch({
+        //   type: 'AUTHENTICATE_USER',
+        //   payload: resp.data
+        // })
+      })
+  }
+}
+
 export const addToUserFeed = subreddit => {
   const preference_setting_id = sessionStorage.getItem('preference_setting');
   const data = { body: JSON.stringify({ subreddit }) };
@@ -88,5 +108,24 @@ export const addToUserFeed = subreddit => {
           payload: resp.data.feed.subreddits
         })
       })
+  }
+}
+
+export const getUserFeed = () => {
+  const preference_setting_id = sessionStorage.getItem('preference_setting');
+
+  return dispatch => {
+    // axios.get(`${baseUrl}/preference_settings/${preference_setting_id}`)
+    // .then(resp => {})
+    dispatch({ type: "LOADING_USER_INFO" });
+    fetch(`${baseUrl}/preference_settings/${preference_setting_id}`)
+      .then(resp => resp.json())
+        .then(data => {
+          debugger;
+          // dispatch({
+          //   type: 'GET_USER_FEED'
+          //   payload: data
+          // })
+        })
   }
 }

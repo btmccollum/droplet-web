@@ -25,7 +25,7 @@ class SubredditDisplay extends Component {
                 Check Out the Most Popular Subreddits:
             
                 <SubredditCardList subreddits={this.props.subreddits} addToUserFeed={this.props.addToUserFeed} />
-                <button onClick={() => console.log(this.props.feed)}>Test</button>
+                <button onClick={() => console.log(this.props.user)}>Test</button>
             </div>
         )
     }
@@ -35,6 +35,7 @@ const mapStateToProps = state => {
     return {
         subreddits: state.subreddits.subreddits,
         // for testing:
+        user: state.user,
         feed: state.user.feed  
     }
 }

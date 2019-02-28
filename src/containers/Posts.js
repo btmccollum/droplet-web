@@ -30,7 +30,7 @@ class Posts extends Component {
                         <Col md={{ span: 8, offset: 2}}>
                         <ButtonToolbar aria-label="Toolbar with sorting options">
                         <ButtonGroup className="mr-12" aria-label="sorting options">
-                            <Button>1</Button>
+                            <Button onClick={() => this.props.fetchPosts(this.props.feed)}>Refresh</Button>
                             <Button>2</Button>
                             <DropdownButton as={ButtonGroup} title="Dropdown" id="bg-nested-dropdown">
                                 <Dropdown.Item eventKey="1" onClick={() => this.fetchPosts('controversial')}>Controversial</Dropdown.Item>

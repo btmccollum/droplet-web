@@ -12,9 +12,17 @@ import Home from './components/Home';
 import SidebarMenu from './components/Menu';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
+import { authenticateUser } from './actions/userActions';
 import { faHome, faImages, faSignInAlt, faSignOutAlt, faUserPlus, faCommentAlt, faArrowAltCircleUp, faMedal, faExternalLinkAlt, faUserCircle } from '@fortawesome/free-solid-svg-icons'
 
 library.add(fab, faHome, faImages, faSignInAlt, faSignOutAlt, faUserPlus, faCommentAlt, faArrowAltCircleUp, faMedal, faExternalLinkAlt, faUserCircle)
+
+// const token = sessionStorage.getItem('jwt');
+
+// if (token) {
+//     debugger;
+//     authenticateUser();
+// }
 
 class App extends Component {
   showState = () => {
