@@ -9,6 +9,7 @@ import Posts from './containers/Posts';
 import { logoutUser } from './actions/userActions';
 import Login from './containers/Login';
 import Home from './components/Home';
+import Profile from './containers/Profile';
 import SidebarMenu from './components/Menu';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
@@ -44,32 +45,15 @@ class App extends Component {
     })
   }
 
-  linkRedditAccount = () => {
-    const baseUrl = 'https://localhost:3000/api/v1' 
-    let data = { 
-      headers: {
-        Authorization: `Bearer ${sessionStorage.getItem('jwt')}`
-      }
-    }
-
-    axios.get(`${baseUrl}/link_oauth`, data)
-    .then(resp => {
-      debugger;
-      console.log(resp)
-      window.location = `${resp.data.url}${resp.data.query_params}`
-    })
-    
-  }
-
   render() {
     return (
       <div className="App">
         <SidebarMenu />
-        <button onClick={this.linkRedditAccount}>Link My Reddit Account</button><br/>
         <Switch>
             <Route exact path ="/" component={ () => loggedIn() ? <Home /> : <Redirect to="/login"/> }/>
-            <Route path = "/posts" component={ Posts } />
+            <Route path="/posts" component={ () => loggedIn() ? <Posts /> : <Redirect to="/"/> }/>
             <Route path='/signup' component={ () => loggedIn() ? <Redirect to="/"/> : <Signup /> }/>
+            <Route path='/profile' component={ () => loggedIn() ? <Profile /> : <Login /> }/>
             <Route path='/login' component={ () => loggedIn() ? <Redirect to="/"/> : <Login /> }/>
             <Route path='/logout' render={ props => { 
               this.props.logoutUser();

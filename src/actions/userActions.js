@@ -5,7 +5,7 @@ const baseUrl = 'https://localhost:3000/api/v1'
 axios.defaults.headers.common['Authorization'] = `Bearer ${sessionStorage.getItem('jwt')}`;
 
 export const signupUser = (user, callback) => {
-    let data = {
+    const data = {
       body: JSON.stringify({ user })
     }
 
@@ -27,7 +27,7 @@ export const signupUser = (user, callback) => {
 }
 
 export const loginUser = (user, callback) => {
-  let data = {
+  const data = {
     body: JSON.stringify({ user })
   }
 
@@ -51,6 +51,22 @@ export const loginUser = (user, callback) => {
   }
 }
 
+export const linkRedditAccount = () => {
+  const data = { 
+    headers: {
+        Authorization: `Bearer ${sessionStorage.getItem('jwt')}`
+    }
+  };
+
+ return dispatch => {
+    fetch(`${baseUrl}/link_oauth`, data)
+      .then(resp => resp.json())
+        .then(json => {
+          window.location = `${json.url}${json.query_params}`
+        })
+  }
+}
+
 export const logoutUser = () => {
   axios.defaults.headers.common['Authorization'] = null;
 
@@ -59,7 +75,7 @@ export const logoutUser = () => {
     sessionStorage.removeItem('preference_setting')
   }
 
-  sessionStorage.setItem('logged_in', '')
+  sessionStorage.removeItem('logged_in')
   
   return dispatch => {
     axios.post(`${baseUrl}/logout`)
@@ -76,15 +92,9 @@ export const logoutUser = () => {
 }   
 
 export const authenticateUser = () => {
-  let data = { 
-    headers: {
-        Authorization: `Bearer ${sessionStorage.getItem('jwt')}`
-    }
-  };
-  debugger;
   return dispatch => {
     dispatch({ type: "LOADING_USER_INFO"})
-    axios.get(`${baseUrl}/load_user`, data)
+    axios.get(`${baseUrl}/load_user`)
       .then( resp => {
         debugger;
         // dispatch({

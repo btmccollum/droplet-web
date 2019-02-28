@@ -60,8 +60,9 @@ controllers/api/v1/users/omnniauth_callbacks_controller.rb
 * React.js
 * Redux.js
 * JavaScript
+* Bootstrap
 ## Authors
-* Brad McCollum
+* [Brad McCollum](https://github.com/btmccollum)
 ## License
 This project is licensed under the MIT License - see the LICENSE.md file for details
 ## Acknowledgments
