@@ -1,4 +1,47 @@
+Droplet is a work-in-progress. More to come in the future!
+
+At this point in time you can expect the following functionality:
+    -A user is able to create an account and link their existing Reddit account (or create a new one)
+    -A user is able to log in and log out successfully
+    -Ability to browse the 100 most popular subreddits at load time and add them to your personalized feed
+    -Ability to browse the 100 top posts from your personalized feed
+    -Ability to open any given post from Reddit and view up to the 100 most recent comments
+
+Droplet-web is the frontend repo for the Droplet web app. To access the Rails API backend, droplet-api, please [click here](https://github.com/btmccollum/droplet-api).
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Quick Start:
+1) You'll need to clone both the front and backend repos:
+```
+git@github.com:btmccollum/droplet-web.git
+git@github.com:btmccollum/droplet-api.git
+```
+
+2) Navigate into the droplet-api file and run:
+```
+bundle install
+```
+
+3) From the droplet-api file:
+```
+rake db:migrate
+```
+
+4) Start the server for the backend using:
+```
+thin start --ssl
+```
+
+5) Navigate into the droplet-web file and run:
+```
+npm install
+```
+
+6) Start the server for the droplet-web frontend using:
+```
+npm start
+```
 
 ## Available Scripts
 
