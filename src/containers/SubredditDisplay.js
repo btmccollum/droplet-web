@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchSubreddits } from '../actions/subredditActions';
 import SubredditCardList from '../components/Subreddits/SubredditCardList';
-import { addToUserFeed } from '../actions/userActions';
+import { addToUserFeed, removeFromUserFeed, authenticateUser } from '../actions/userActions';
 import { userInfo } from 'os';
 
 
@@ -11,21 +11,13 @@ class SubredditDisplay extends Component {
         this.props.fetchSubreddits()
     }
 
-    // addToUserFeed = () => {
-    //     const baseUrl = 'https://localhost:3000/api/v1'
-
-        // const data = {
-        //     body: JSON.stringify({ user })
-        // }
-    // }
-
     render() {
         return (
             <div className="srList">
                 Check Out the Most Popular Subreddits:
-            
-                <SubredditCardList subreddits={this.props.subreddits} addToUserFeed={this.props.addToUserFeed} />
                 <button onClick={() => console.log(this.props.user)}>Test</button>
+                <button onClick={() => this.props.authenticateUser()}>Get User</button>
+                <SubredditCardList subreddits={this.props.subreddits} addToUserFeed={this.props.addToUserFeed} removeFromUserFeed={this.props.removeFromUserFeed} feed={this.props.feed}/>
             </div>
         )
     }
@@ -34,10 +26,10 @@ class SubredditDisplay extends Component {
 const mapStateToProps = state => {
     return {
         subreddits: state.subreddits.subreddits,
+        feed: state.user.feed,
         // for testing:
-        user: state.user,
-        feed: state.user.feed  
+        user: state.user
     }
 }
 
-export default connect(mapStateToProps, { fetchSubreddits, addToUserFeed })(SubredditDisplay);
+export default connect(mapStateToProps, { fetchSubreddits, addToUserFeed, removeFromUserFeed, authenticateUser })(SubredditDisplay);

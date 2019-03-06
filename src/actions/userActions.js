@@ -117,10 +117,26 @@ export const addToUserFeed = subreddit => {
   return dispatch => {
     axios.put(`${baseUrl}/preference_settings/${preference_setting_id}`, data)
       .then(resp => {
-        debugger;
         dispatch({
           type: 'ADD_TO_USER_FEED',
           payload: resp.data.feed.subreddits
+        })
+      })
+  }
+}
+
+export const removeFromUserFeed = subreddit => {
+  const preference_setting_id = sessionStorage.getItem('preference_setting');
+  const data = { body: JSON.stringify({ subreddit }) };
+
+  axios.defaults.headers.common['Authorization'] = `Bearer ${sessionStorage.getItem('jwt')}`;
+
+  return dispatch => {
+    axios.delete(`${baseUrl}/preference_settings/${preference_setting_id}`, { data: data })
+      .then(resp => {
+        dispatch({
+          type: 'REMOVE_FROM_USER_FEED',
+          payload: subreddit
         })
       })
   }
