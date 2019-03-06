@@ -30,13 +30,15 @@ class Login extends Component {
 
     return (
       <React.Fragment>
-        <h1>Log In</h1>
-        <form onSubmit={ this.onSubmit }>
-          <input name="email" placeholder="Email" value={ email } onChange={ this.handleOnChange }/><br/>
-          <input type='password' name="password" placeholder="Password" value={ password } onChange={ this.handleOnChange }/><br/>
-          <button type="submit">Login</button>
-        </form>
-        <Link to='/signup'>Sign Up</Link>
+        <div className="login">
+          <h1>Log In</h1>
+          <form onSubmit={ this.onSubmit }>
+            <input name="email" placeholder="Email" value={ email } onChange={ this.handleOnChange }/><br/>
+            <input type='password' name="password" placeholder="Password" value={ password } onChange={ this.handleOnChange }/><br/>
+            <button type="submit">Login</button>
+          </form>
+          <Link to='/signup'>Sign Up</Link>
+        </div>
       </React.Fragment>
     )
   }

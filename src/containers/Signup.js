@@ -29,15 +29,17 @@ class Signup extends Component {
   
       return (
         <React.Fragment>
-          <h1>Sign Up</h1>
-          <button onClick={console.log(test)}>JWT</button>
-          <form onSubmit={ this.handleOnSubmit }>
-            <input name="email" placeholder="Email" value={ email } onChange={ this.handleOnChange }/><br/>
-            <input type='password' name="password" placeholder="Password" value={ password } onChange={ this.handleOnChange }/><br/>
-            <input type='password' name="password_confirmation" placeholder="Password Confirmation" value={ password_confirmation } onChange={ this.onChange }/><br/>
-            <button type="submit">Signup</button>
-          </form>
-          <Link to='/login'>Log In</Link>
+          <div className="signup">
+            <h1>Sign Up</h1>
+            <button onClick={console.log(test)}>JWT</button>
+            <form onSubmit={ this.handleOnSubmit }>
+              <input name="email" placeholder="Email" value={ email } onChange={ this.handleOnChange }/><br/>
+              <input type='password' name="password" placeholder="Password" value={ password } onChange={ this.handleOnChange }/><br/>
+              <input type='password' name="password_confirmation" placeholder="Password Confirmation" value={ password_confirmation } onChange={ this.onChange }/><br/>
+              <button type="submit">Signup</button>
+            </form>
+            <Link to='/login'>Log In</Link>
+          </div>
         </React.Fragment>
       )
     }

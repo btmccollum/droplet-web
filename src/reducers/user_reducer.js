@@ -10,7 +10,6 @@ export default function userReducer(state = { currentUser: {}, feed: [], loading
         return { ...state, currentUser: action.payload, loading: false }
 
       case 'ADD_TO_USER_FEED':
-        debugger;
         return { ...state, feed: [...action.payload], loading: false}
 
       case 'REMOVE_FROM_USER_FEED':

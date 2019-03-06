@@ -11,7 +11,11 @@ const SubredditCard = props => {
                 <Card.Body>
                     <Card.Title>{subreddit.display_name_prefixed}</Card.Title>
                     <Card.Text>{subreddit.public_description}</Card.Text>
-                    <Button variant="primary" onClick={() => props.addToUserFeed(subreddit.display_name)}>Add To Feed</Button>
+                    <Button 
+                        variant={subreddit.over18 === true ? "danger" : "primary"} 
+                        onClick={() => props.addToUserFeed(subreddit.display_name)}>
+                        { subreddit.over18 === true ? "NSFW - Add To Feed" : "Add To Feed"}
+                    </Button>
                 </Card.Body>
             </Card>
         </Col>
