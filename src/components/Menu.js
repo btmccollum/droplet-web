@@ -11,6 +11,8 @@ class SidebarMenu extends Component {
         if (sessionStorage.getItem('logged_in') === 'true') {
             return (
                 <React.Fragment>
+                    <NavLink id="home" className="bm-item" to="/"><FontAwesomeIcon icon="home" /><span>Home</span></NavLink>
+                    <NavLink id="posts" className="bm-item" to="/posts"><FontAwesomeIcon icon="images" /><span>Feed</span></NavLink>
                     <NavLink id="login" className="bm-item" to="/profile"><FontAwesomeIcon icon="user-circle" /><span>Profile</span></NavLink>
                     <NavLink id="logout" className="bm-item" to="/logout"><FontAwesomeIcon icon="sign-out-alt" /><span>Log Out</span></NavLink>
                 </React.Fragment>   
@@ -30,8 +32,6 @@ class SidebarMenu extends Component {
         return (
             <ReduxBurgerMenu isOpen={ this.props.isOpen } width={ 225 }>
                 <nav className="bm-item-list">
-                    <NavLink id="home" className="bm-item" to="/"><FontAwesomeIcon icon="home" /><span>Home</span></NavLink>
-                    <NavLink id="posts" className="bm-item" to="/posts"><FontAwesomeIcon icon="images" /><span>Feed</span></NavLink>
                     {this.statusOptions()}
                 </nav>
             </ReduxBurgerMenu>

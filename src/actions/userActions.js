@@ -99,10 +99,11 @@ export const authenticateUser = () => {
   return dispatch => {
     dispatch({ type: "LOADING_USER_INFO"})
     axios.get(`${baseUrl}/load_user`)
-      .then( resp => {
+      .then( json => {
+        sessionStorage.setItem('preference_setting', json.data.preferences)
         dispatch({
           type: 'AUTHENTICATE_USER',
-          payload: resp.data
+          payload: json.data
         })
       })
   }

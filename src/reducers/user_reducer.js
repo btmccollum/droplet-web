@@ -13,9 +13,7 @@ export default function userReducer(state = { currentUser: {}, feed: [], loading
         return { ...state, feed: [...action.payload], loading: false}
 
       case 'REMOVE_FROM_USER_FEED':
-        debugger 
         return { ...state, feed: [...state.feed.filter(el => el !== action.payload)]}
-        // return state;
 
       case 'GET_USER_FEED':
         return { ...state, feed: [...action.payload], loading: false}

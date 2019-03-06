@@ -4,6 +4,7 @@ import { fetchSubreddits } from '../actions/subredditActions';
 import SubredditCardList from '../components/Subreddits/SubredditCardList';
 import { addToUserFeed, removeFromUserFeed, authenticateUser } from '../actions/userActions';
 import { userInfo } from 'os';
+import { bindActionCreators } from 'redux';
 
 
 class SubredditDisplay extends Component {
@@ -32,4 +33,11 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, { fetchSubreddits, addToUserFeed, removeFromUserFeed, authenticateUser })(SubredditDisplay);
+const mapDispatchToProps = dispatch => bindActionCreators({
+    fetchSubreddits, 
+    addToUserFeed, 
+    removeFromUserFeed, 
+    authenticateUser
+  }, dispatch)
+
+export default connect(mapStateToProps, mapDispatchToProps)(SubredditDisplay);

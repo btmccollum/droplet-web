@@ -19,23 +19,15 @@ import { faHome, faImages, faSignInAlt, faSignOutAlt, faUserPlus, faCommentAlt, 
 library.add(fab, faHome, faImages, faSignInAlt, faSignOutAlt, faUserPlus, faCommentAlt, faArrowAltCircleUp, faMedal, faExternalLinkAlt, faUserCircle)
 
 class App extends Component {
+  // if a user causes state to refresh while logged_in we will force the server to reidentify and set the correct user
+  componentDidMount() {
+    if (!!sessionStorage.getItem('logged_in') && Object.keys(this.props.currentUser).length < 1 ) {
+      this.props.authenticateUser()
+    }
+  }
+  
   showState = () => {
     console.log(this.props.currentUser)
-  }
-
-  postFetch = () => {
-    const baseUrl = 'https://localhost:3000/api/v1'
-    let data = { 
-      credentials: 'include', 
-      headers: {
-        Authorization: `Bearer ${sessionStorage.getItem('jwt')}`
-      },
-      jwt: sessionStorage.getItem('jwt')
-    }
-    axios.get(`${baseUrl}/post_test`, data)
-    .then(resp => {
-      console.log(resp)
-    })
   }
 
   render() {
@@ -66,4 +58,4 @@ const mapStateToProps = state => {
 
 const loggedIn = () => !!sessionStorage['logged_in'];
 
-export default withRouter(connect(mapStateToProps, { logoutUser })(App));
+export default withRouter(connect(mapStateToProps, { logoutUser, authenticateUser })(App));
