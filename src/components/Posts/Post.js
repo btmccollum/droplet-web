@@ -98,10 +98,10 @@ class Post extends Component {
 
     return (
       <React.Fragment>
-        <Container>
+        <Container onClick={this.handleShow}>
           <Row className="postCol">
             <Col md={{ span: 9 }} >
-              <Row className="postTitleAndCreds" onClick={this.handleShow}>
+              <Row className="postTitleAndCreds">
                   <Col className="bodyContainer">
                     <span className="postTitle">{details.title} <a href={details.url} className="ellipses" target="_blank" rel="noopener"><span>{details.url}</span><FontAwesomeIcon icon="external-link-alt" /></a></span><br/>
                     <span className="postCreds"> {details.subreddit_name_prefixed} - Posted by u/{details.author}</span><br/>

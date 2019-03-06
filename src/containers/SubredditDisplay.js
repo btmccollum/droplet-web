@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { fetchSubreddits } from '../actions/subredditActions';
 import SubredditCardList from '../components/Subreddits/SubredditCardList';
 import { addToUserFeed, removeFromUserFeed, authenticateUser } from '../actions/userActions';
-import { userInfo } from 'os';
 import { bindActionCreators } from 'redux';
 
 
@@ -15,9 +14,7 @@ class SubredditDisplay extends Component {
     render() {
         return (
             <div className="srList">
-                Check Out the Most Popular Subreddits:
-                <button onClick={() => console.log(this.props.user)}>Test</button>
-                <button onClick={() => this.props.authenticateUser()}>Get User</button>
+                <h4>Check Out the Most Popular Subreddits:</h4>
                 <SubredditCardList subreddits={this.props.subreddits} addToUserFeed={this.props.addToUserFeed} removeFromUserFeed={this.props.removeFromUserFeed} feed={this.props.feed}/>
             </div>
         )
@@ -27,9 +24,7 @@ class SubredditDisplay extends Component {
 const mapStateToProps = state => {
     return {
         subreddits: state.subreddits.subreddits,
-        feed: state.user.feed,
-        // for testing:
-        user: state.user
+        feed: state.user.feed
     }
 }
 
