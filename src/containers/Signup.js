@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { signupUser } from '../actions/userActions';
-import { Link } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import { clearErrors } from '../actions/errorActions';
 
 class Signup extends Component {
     state = {
         email: '',
-        password: ''
+        password: '',
+        password_confirmation: ''
     }
   
     handleOnChange = event => {
@@ -21,11 +23,25 @@ class Signup extends Component {
     handleOnSubmit = event => {
       event.preventDefault()
       const user = this.state
-      this.props.signupUser(user, () => this.props.history.push('/'))
+      this.props.signupUser(user, () => this.props.history.push('/link_account'))
+    }
+
+    handleErrors = () => {
+      if (this.props.errors) { 
+      return (
+        this.props.errors.map(error => <li>{error}</li>)
+      )
+      }
+    }
+
+    componentWillUnmount() {
+      clearErrors()
     }
   
     render() {
-      const { email, password, password_confirmation } = this.state
+      const { email, password, password_confirmation } = this.state;
+      // const { errors } = this.props;
+      const loadErrors = this.props.errors.map(error => <li>{error}</li>)
   
       return (
         <React.Fragment>
@@ -34,9 +50,10 @@ class Signup extends Component {
               <Col md={{ span: 8 }}>
                 <Form onSubmit={this.handleOnSubmit} className="signup">
                 <h1>Get started with Droplet!</h1>
+                <ul>{this.handleErrors()}</ul>
                   <Form.Group controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
-                    <Form.Control type="email" placeholder="Enter email" name="email" value={email} onChange={this.handleOnChange} />
+                    <Form.Control type="email" placeholder="Enter email" name="email" value={email} onChange={this.handleOnChange.bind(this)} />
                     <Form.Text className="text-muted">
                       We'll never share your email with anyone else.
                     </Form.Text>
@@ -64,4 +81,10 @@ class Signup extends Component {
     }
 }
   
-export default connect(null, { signupUser })(Signup);
+const mapStateToProps = state => {
+  return {
+    errors: state.errors.errors
+  }
+}
+
+export default withRouter(connect(mapStateToProps, { signupUser })(Signup));

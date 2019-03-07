@@ -21,7 +21,7 @@ export default function userReducer(state = { currentUser: {}, feed: [], loading
       case 'AUTHENTICATE_USER':
         const user = action.payload;
         return { ...state, currentUser: user.current, feed: [...user.preferences.subreddits], loading: false }
-      
+
       default: 
         return state;
     }

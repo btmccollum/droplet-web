@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const baseUrl = 'https://localhost:3000/api/v1'
 
-export function fetchPosts(subreddits) {
+export function fetchPosts(subreddits = null) {
     let data = { 
         headers: {
             Authorization: `Bearer ${sessionStorage.getItem('jwt')}`
@@ -11,9 +11,11 @@ export function fetchPosts(subreddits) {
     };
   
     return dispatch => {
+        debugger;
         dispatch({ type: "LOADING_POSTS" });
         return axios.get(`${baseUrl}/fetch_posts`, data)
             .then(response => {
+                debugger;
                 dispatch({ type: "FETCH_POSTS", payload: response.data.posts.data.children })
             })
     }

@@ -23,9 +23,19 @@ export const signupUser = (user, callback) => {
           });
           callback()
         })
-        .catch(err => err)
+        .catch(error => {
+          dispatch({ type: 'SHOW_ERROR', message: error.response.data.error })
+        })
     }
 }
+
+// .catch(err => {
+//   debugger;
+//   dispatch({
+//     type: 'CREATE_USER_FAILURE',
+//     message: err.response.data.error || 'Something went wrong.'
+//   })
+// })
 
 export const loginUser = (user, callback) => {
   const data = {
@@ -89,9 +99,7 @@ export const logoutUser = () => {
           payload: ''
         })
       })
-  .catch(error => {
-    console.log(error.message);
-  })
+  .catch(error => {console.log(error.message)})
   }
 }   
 
