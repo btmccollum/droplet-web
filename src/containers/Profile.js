@@ -24,10 +24,9 @@ class Profile extends Component {
 
     return (
       <React.Fragment>
-        <Row>
+        <Row className="d-flex justify-content-center w-100 h-100 align-items-center">
           <Col md={{ span: 8, offset: 4 }}>
             <div className="profile">
-              <h1>Profile:</h1>
               <p><img src={user.img} alt="user avatar"/></p>
               <span>Reddit Username: {user.username}</span><br/>
               <span>Email: {user.email}</span><br/>
