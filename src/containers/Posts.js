@@ -24,30 +24,9 @@ class Posts extends Component {
 
     render() {
         return (
-            <React.Fragment>
-                <Container>
-                    <Row>
-                        <Col md={{ span: 8, offset: 2}}>
-                        <ButtonToolbar aria-label="Toolbar with sorting options">
-                        <ButtonGroup className="mr-12" aria-label="sorting options">
-                            <Button onClick={() => this.props.fetchPosts(this.props.feed)}>Refresh</Button>
-                            <Button>2</Button>
-                            <DropdownButton as={ButtonGroup} title="Dropdown" id="bg-nested-dropdown">
-                                <Dropdown.Item eventKey="1" onClick={() => this.fetchPosts('controversial')}>Controversial</Dropdown.Item>
-                                <Dropdown.Item eventKey="2" onClick={() => this.fetchPosts('hot')}>Hot</Dropdown.Item>
-                                <Dropdown.Item eventKey="3" onClick={() => this.fetchPosts('new')}>New</Dropdown.Item>
-                                <Dropdown.Item eventKey="4" onClick={() => this.fetchPosts('rising')}>Rising</Dropdown.Item>
-                                <Dropdown.Item eventKey="5" onClick={() => this.fetchPosts('top')}>Top</Dropdown.Item>
-                            </DropdownButton>
-                            </ButtonGroup>
-                        </ButtonToolbar>
-                        </Col>
-                    </Row>
-                </Container>
-                <div className="postListContainer">
-                    {this.loadPosts()}
-                </div>
-            </React.Fragment>
+            <div className="postListContainer">
+                {this.loadPosts()}
+            </div>
         )
     }
 }

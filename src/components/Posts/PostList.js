@@ -21,7 +21,7 @@ const PostList = props => {
     const postList = props.posts.map(post => <Post key={cuid()} post={post.data} />);
 
     return (
-        <Container>
+        <Container className="postListing">
             {postList}
         </Container>
     )
