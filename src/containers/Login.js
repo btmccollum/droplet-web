@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router-dom';
 import { loginUser } from '../actions/userActions';
+import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 
 class Login extends Component {
     state = {
@@ -30,15 +31,31 @@ class Login extends Component {
 
     return (
       <React.Fragment>
-        <div className="login">
-          <h1>Log In</h1>
-          <form onSubmit={ this.onSubmit }>
-            <input name="email" placeholder="Email" value={ email } onChange={ this.handleOnChange }/><br/>
-            <input type='password' name="password" placeholder="Password" value={ password } onChange={ this.handleOnChange }/><br/>
-            <button type="submit">Login</button>
-          </form>
-          <Link to='/signup'>Sign Up</Link>
-        </div>
+        <Container>
+          <Row className="d-flex justify-content-center w-100 h-100 align-items-center">
+            <Col md={{ span: 8 }}>
+              <Form onSubmit={this.onSubmit} className="login">
+              <h1>Welcome back to Droplet!</h1>
+                <Form.Group controlId="formBasicEmail">
+                  <Form.Label>Email address</Form.Label>
+                  <Form.Control type="email" placeholder="Enter email" name="email" value={email} onChange={this.handleOnChange} />
+                  <Form.Text className="text-muted">
+                    We'll never share your email with anyone else.
+                  </Form.Text>
+                </Form.Group>
+
+                <Form.Group controlId="formBasicPassword">
+                  <Form.Label>Password</Form.Label>
+                  <Form.Control type="password" placeholder="Password" name="password" value={password} onChange={this.handleOnChange} />
+                </Form.Group>
+
+                <Button variant="primary" type="submit">Submit</Button>
+              <br/>
+              <p><Link to='/signup'>Sign Up</Link></p>
+              </Form>
+            </Col>
+          </Row>
+        </Container>
       </React.Fragment>
     )
   }

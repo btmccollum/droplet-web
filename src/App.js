@@ -33,7 +33,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <SidebarMenu />
+        <SidebarMenu img={this.props.currentUser.img}/>
         <Switch>
             <Route exact path ="/" component={ () => loggedIn() ? <Home /> : <Redirect to="/login"/> }/>
             <Route path="/posts" component={ () => loggedIn() ? <Posts /> : <Redirect to="/"/> }/>

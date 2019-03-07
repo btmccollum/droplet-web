@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { signupUser } from '../actions/userActions';
 import { Link } from 'react-router-dom';
+import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 
 class Signup extends Component {
     state = {
@@ -25,21 +26,39 @@ class Signup extends Component {
   
     render() {
       const { email, password, password_confirmation } = this.state
-      let test = sessionStorage.getItem('jwt')
   
       return (
         <React.Fragment>
-          <div className="signup">
-            <h1>Sign Up</h1>
-            <button onClick={console.log(test)}>JWT</button>
-            <form onSubmit={ this.handleOnSubmit }>
-              <input name="email" placeholder="Email" value={ email } onChange={ this.handleOnChange }/><br/>
-              <input type='password' name="password" placeholder="Password" value={ password } onChange={ this.handleOnChange }/><br/>
-              <input type='password' name="password_confirmation" placeholder="Password Confirmation" value={ password_confirmation } onChange={ this.onChange }/><br/>
-              <button type="submit">Signup</button>
-            </form>
-            <Link to='/login'>Log In</Link>
-          </div>
+          <Container>
+            <Row className="d-flex justify-content-center w-100 h-100 align-items-center">
+              <Col md={{ span: 8 }}>
+                <Form onSubmit={this.handleOnSubmit} className="signup">
+                <h1>Get started with Droplet!</h1>
+                  <Form.Group controlId="formBasicEmail">
+                    <Form.Label>Email address</Form.Label>
+                    <Form.Control type="email" placeholder="Enter email" name="email" value={email} onChange={this.handleOnChange} />
+                    <Form.Text className="text-muted">
+                      We'll never share your email with anyone else.
+                    </Form.Text>
+                  </Form.Group>
+
+                  <Form.Group controlId="formBasicPassword">
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control type="password" placeholder="Password" name="password" value={password} onChange={this.handleOnChange} />
+                  </Form.Group>
+
+                  <Form.Group controlId="formPasswordConfirmation">
+                    <Form.Label>Password Confirmation</Form.Label>
+                    <Form.Control type="password" placeholder="Password" name="password_confirmation" value={password_confirmation} onChange={this.handleOnChange} />
+                  </Form.Group>
+
+                  <Button variant="primary" type="submit">Submit</Button>
+
+                  <p><Link to='/login'>Log In</Link></p>
+                </Form>
+              </Col>
+            </Row>
+          </Container>
         </React.Fragment>
       )
     }

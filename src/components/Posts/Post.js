@@ -109,6 +109,7 @@ class Post extends Component {
               </Row>
               
               <div className="postSpace">&nbsp;</div>
+              
               <footer className="postFooter push">
                 <span className="postCommentCount"><FontAwesomeIcon icon="comment-alt" /> {details.num_comments} </span>
                 <span className="postUpvotes"><FontAwesomeIcon icon="arrow-alt-circle-up" /> {details.score} </span>

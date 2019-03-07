@@ -270,7 +270,18 @@ Note: Beware of modifying this element as it can break the animations - you shou
   vertical-align: middle;
 }
 
+/* ------------ PROFILE/LOGIN/SIGNUP DISPLAY ---------------- */
+
 .signup,
 .login {
-  text-align: center;
+  /* text-align: center; */
+  margin-top: 40%;
 }
+
+.profile, {
+  margin-top: 10%;
+}
+
+/* .profile img {
+  border-radius: 50%;
+} */
