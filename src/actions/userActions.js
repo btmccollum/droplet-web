@@ -55,7 +55,7 @@ export const loginUser = (user, callback) => {
         callback()
       })
       .catch(error => {
-        console.log(error.message)
+        dispatch({ type: 'SHOW_ERROR', message: error.response.data.error })
       })
   }
 }

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchPosts } from '../actions/postActions';
 import PostList from '../components/Posts/PostList';
+import Loading from '../components/Loading';
 import { Container, Row, Col, ButtonToolbar, ButtonGroup, DropdownButton, Dropdown, Button } from 'react-bootstrap';
 
 class Posts extends Component {
@@ -18,15 +19,17 @@ class Posts extends Component {
             return (<PostList posts={this.props.posts}/>)
         }
         else {
-            return (<span>Loading...</span> )
+            return <Loading />
         }
     }
 
     render() {
         return (
-            <div className="postListContainer">
-                {this.loadPosts()}
-            </div>
+            <React.Fragment>
+                <Container className="postListContainer h-100">
+                    {this.loadPosts()}
+                </Container>
+            </React.Fragment>
         )
     }
 }

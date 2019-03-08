@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Link } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import { loginUser } from '../actions/userActions';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import { clearErrors } from '../actions/errorActions';
+import cuid from 'cuid';
 
 class Login extends Component {
     state = {
@@ -26,6 +28,20 @@ class Login extends Component {
     this.props.loginUser(user, () => this.props.history.push('/'))
   }
 
+  handleErrors = () => {
+    if (this.props.errors) { 
+      return (
+        this.props.errors.map(error => <li key={cuid()}>{error}</li>)
+      )
+    }
+  }
+
+  componentWillUnmount() {
+    if (this.props.errors.length > 0) {
+      clearErrors()
+    }
+  }
+
   render() {
     const { email, password } = this.state
 
@@ -36,6 +52,7 @@ class Login extends Component {
             <Col md={{ span: 8 }}>
               <Form onSubmit={this.onSubmit} className="login">
               <h1>Welcome back to Droplet!</h1>
+              <ul>{this.handleErrors()}</ul>
                 <Form.Group controlId="formBasicEmail">
                   <Form.Label>Email address</Form.Label>
                   <Form.Control type="email" placeholder="Enter email" name="email" value={email} onChange={this.handleOnChange} />
@@ -61,8 +78,15 @@ class Login extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    errors: state.errors.errors
+  }
+}
+
 const mapDispatchToProps = dispatch => bindActionCreators({
-  loginUser
+  loginUser,
+  clearErrors
 }, dispatch)
 
-export default connect(null, mapDispatchToProps)(Login);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login));

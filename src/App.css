@@ -307,6 +307,10 @@ Note: Beware of modifying this element as it can break the animations - you shou
   max-height: 220px;
 }
 
+.loadingNotice {
+  text-align: center;
+}
+
 .subRedditCards.card-columns {
   /* @include media-breakpoint-only(md) {
     column-count: 2;
