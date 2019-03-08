@@ -4,7 +4,7 @@ const Comment = props => {
     const comment = props.comment;
 
     return (
-        <p>{comment.author}: {comment.body}</p>
+        <p><strong>{comment.author}</strong>: {comment.body}</p>
     )
 }
 
