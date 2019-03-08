@@ -135,10 +135,13 @@ class Post extends Component {
             <Container>
               <Row>
                 <Col className="modalTitle" md={{ span: 12 }}>
-                  <Modal.Title><h4>{details.title}</h4></Modal.Title>
+                  <Modal.Title>
+                    {details.title}
+                  </Modal.Title>
                 </Col>
                 <Col className="modalContent" md={{ span: 12 }}>
                   <div>{this.determineContentToLoad()}</div>
+                  <span className="postSubtitle">{details.score} points - Posted by {details.author} in {details.subreddit_name_prefixed}</span>
                 </Col>
               </Row>
               </Container>

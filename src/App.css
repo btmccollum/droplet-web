@@ -147,6 +147,13 @@ Note: Beware of modifying this element as it can break the animations - you shou
   color: rgb(215, 218, 220);
 }
 
+/* Modal Post subtitle */
+.postSubtitle {
+  font-size: .8em;
+  font-style: italic;
+  color: rgb(118, 119, 118);
+}
+
 /* ------------ POSTS DISPLAY ---------------- */
 .postListing{
   padding-top: 2.5%;
@@ -255,6 +262,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
 .commentPoints {
   font-size: .85em;
+  color: rgb(118, 119, 118);
 }
 
 /* ------------ SUBREDDITS CARD DISPLAY ---------------- */
