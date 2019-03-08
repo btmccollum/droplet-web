@@ -37,15 +37,16 @@ export const loginUser = (user, callback) => {
   axios.defaults.headers.common['Authorization'] = null;
 
   return dispatch => {
+    dispatch({ type: "LOADING_USER_INFO"})
     axios.post(`${ baseUrl }/auth`, data)
       .then(json => {
         sessionStorage.setItem('logged_in', 'true')
         sessionStorage.setItem('jwt', json.data.jwt)
-        sessionStorage.setItem('preference_setting', json.data.preferences)
+        sessionStorage.setItem('preference_setting', json.data.preferences.id)
         
         dispatch({
-          type: 'SET_USER',
-          payload: json.data.current
+          type: 'AUTHENTICATE_USER',
+          payload: json.data
         })
 
         callback()

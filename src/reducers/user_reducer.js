@@ -4,6 +4,7 @@ export default function userReducer(state = { currentUser: {}, feed: [], loading
         return { ...state, loading: true }
 
       case 'SET_USER':
+      debugger;
         return { ...state, currentUser: action.payload, loading: false }
 
       case 'LOGOUT_USER':
@@ -19,6 +20,7 @@ export default function userReducer(state = { currentUser: {}, feed: [], loading
         return { ...state, feed: [...action.payload], loading: false}
 
       case 'AUTHENTICATE_USER':
+      debugger;
         const user = action.payload;
         return { ...state, currentUser: user.current, feed: [...user.preferences.subreddits], loading: false }
 
