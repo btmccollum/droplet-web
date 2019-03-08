@@ -47,7 +47,7 @@ class Signup extends Component {
   
       return (
         <React.Fragment>
-          <Container>
+          <Container className="h-100">
             <Row className="d-flex justify-content-center w-100 h-100 align-items-center">
               <Col md={{ span: 8 }}>
                 <Form onSubmit={this.handleOnSubmit} className="signup">

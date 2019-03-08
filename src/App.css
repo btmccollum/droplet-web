@@ -119,6 +119,8 @@ Note: Beware of modifying this element as it can break the animations - you shou
   max-width: 100%;
   display: block;
   margin: auto;
+  padding-top: 2%;
+  padding-bottom: 2%;
 }
 
 .modal-body {
@@ -294,15 +296,11 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
 /* ------------ PROFILE/LOGIN/SIGNUP DISPLAY ---------------- */
 
-.signup,
+/* .signup,
 .login {
-  /* text-align: center; */
+  text-align: center;
   margin-top: 40%;
-}
-
-.profile {
-  margin-top: 10%;
-}
+} */
 
 .profile img {
   border-radius: 50%;
