@@ -5,6 +5,10 @@ import ReactPlayer from 'react-player';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ReactHtmlParser from 'react-html-parser';
 
+function htmlDecode(input){
+  var doc = new DOMParser().parseFromString(input, "text/html");
+  return doc.documentElement.textContent;
+}
 
 class Post extends Component {
   constructor(props, context) {
@@ -29,11 +33,6 @@ class Post extends Component {
   determineContentToLoad = () => {
     const details = this.props.post;
     if (Object.keys(details.media_embed).length !== 0) {
-      function htmlDecode(input){
-        var doc = new DOMParser().parseFromString(input, "text/html");
-        return doc.documentElement.textContent;
-      }
-      
        return ReactHtmlParser(htmlDecode(details.media.oembed.html))
     } else if (details.preview !== undefined && details.preview.reddit_video_preview) {
       return (
@@ -60,7 +59,7 @@ class Post extends Component {
         />
       )
     } else if (!!details.selftext) {
-      return <span>{details.selftext}</span>
+      return ReactHtmlParser(htmlDecode(details.selftext_html))
     } else if (details.thumbnail === 'self') { 
       return <img src={process.env.PUBLIC_URL + '45332556-wassertropfen-umriss-symbol-modern-minimal-flache-design-stil-vektor-illustration.jpg'} />
     } else if (details.post_hint === 'image') {
@@ -136,10 +135,10 @@ class Post extends Component {
             <Container>
               <Row>
                 <Col className="modalTitle" md={{ span: 12 }}>
-                  <Modal.Title><h5>{details.title}</h5></Modal.Title>
+                  <Modal.Title><h4>{details.title}</h4></Modal.Title>
                 </Col>
                 <Col className="modalContent" md={{ span: 12 }}>
-                  <p>{this.determineContentToLoad()}</p>
+                  <div>{this.determineContentToLoad()}</div>
                 </Col>
               </Row>
               </Container>
