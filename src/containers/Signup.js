@@ -4,6 +4,7 @@ import { signupUser } from '../actions/userActions';
 import { withRouter, Link } from 'react-router-dom';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { clearErrors } from '../actions/errorActions';
+import cuid from 'cuid';
 
 class Signup extends Component {
     state = {
@@ -29,7 +30,7 @@ class Signup extends Component {
     handleErrors = () => {
       if (this.props.errors) { 
         return (
-          this.props.errors.map(error => <li>{error}</li>)
+          this.props.errors.map(error => <li key={cuid()}>{error}</li>)
         )
       }
     }
@@ -43,7 +44,6 @@ class Signup extends Component {
     render() {
       const { email, password, password_confirmation } = this.state;
       // const { errors } = this.props;
-      const loadErrors = this.props.errors.map(error => <li>{error}</li>)
   
       return (
         <React.Fragment>

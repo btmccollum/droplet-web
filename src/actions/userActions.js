@@ -2,7 +2,9 @@ import axios from 'axios';
 
 const baseUrl = 'https://localhost:3000/api/v1'
 
-axios.defaults.headers.common['Authorization'] = `Bearer ${sessionStorage.getItem('jwt')}`;
+const setHeaders = () => { return axios.defaults.headers.common['Authorization'] = `Bearer ${sessionStorage.getItem('jwt')}` };
+
+// --------------- USER STATE ACTIONS ---------------
 
 export const signupUser = (user, callback) => {
     const data = {
@@ -11,6 +13,7 @@ export const signupUser = (user, callback) => {
     axios.defaults.headers.common['Authorization'] = null;
 
     return dispatch => {
+      dispatch({ type: "LOADING_USER_INFO"})
       axios.post(`${ baseUrl }/users`, data)
         .then(json => {
           sessionStorage.setItem('logged_in', 'true')
@@ -57,6 +60,65 @@ export const loginUser = (user, callback) => {
   }
 }
 
+export const logoutUser = () => {
+  axios.defaults.headers.common['Authorization'] = null;
+
+  if (sessionStorage['jwt']) { 
+    sessionStorage.removeItem('jwt') 
+    sessionStorage.removeItem('preference_setting')
+  }
+
+  sessionStorage.removeItem('logged_in')
+  
+  return dispatch => {
+    dispatch({ type: "LOADING_USER_INFO"})
+    axios.post(`${baseUrl}/logout`)
+      .then(resp => {
+        dispatch({
+          type: 'LOGOUT_USER',
+          payload: ''
+        })
+      })
+  .catch(error => {console.log(error.message)})
+  }
+}   
+
+export const authenticateUser = () => {
+  return dispatch => {
+    setHeaders()
+    dispatch({ type: "LOADING_USER_INFO"})
+    axios.get(`${baseUrl}/load_user`)
+      .then( json => {
+        sessionStorage.setItem('preference_setting', json.data.preferences)
+        dispatch({
+          type: 'AUTHENTICATE_USER',
+          payload: json.data
+        })
+      })
+  }
+}
+
+export const deleteUser = id => {
+  setHeaders();
+
+  return dispatch => {
+    dispatch({ type: "LOADING_USER_INFO"})
+    axios.delete(`${baseUrl}/users/${id}`)
+      .then( json => {
+        sessionStorage.removeItem('jwt') 
+        sessionStorage.removeItem('preference_setting') 
+        sessionStorage.removeItem('logged_in')
+
+        dispatch({
+          type: 'DELETE_USER',
+        })
+      })
+    .catch(error => {console.log(error.message)})
+  }
+}
+
+// --------------- USER ACCOUNT ACTIONS ---------------
+
 export const linkRedditAccount = () => {
   const data = { 
     headers: {
@@ -74,41 +136,7 @@ export const linkRedditAccount = () => {
   }
 }
 
-export const logoutUser = () => {
-  axios.defaults.headers.common['Authorization'] = null;
-
-  if (sessionStorage['jwt']) { 
-    sessionStorage.removeItem('jwt') 
-    sessionStorage.removeItem('preference_setting')
-  }
-
-  sessionStorage.removeItem('logged_in')
-  
-  return dispatch => {
-    axios.post(`${baseUrl}/logout`)
-      .then(resp => {
-        dispatch({
-          type: 'LOGOUT_USER',
-          payload: ''
-        })
-      })
-  .catch(error => {console.log(error.message)})
-  }
-}   
-
-export const authenticateUser = () => {
-  return dispatch => {
-    dispatch({ type: "LOADING_USER_INFO"})
-    axios.get(`${baseUrl}/load_user`)
-      .then( json => {
-        sessionStorage.setItem('preference_setting', json.data.preferences)
-        dispatch({
-          type: 'AUTHENTICATE_USER',
-          payload: json.data
-        })
-      })
-  }
-}
+// --------------- USER FEED ACTIONS ---------------
 
 export const addToUserFeed = subreddit => {
   const preference_setting_id = sessionStorage.getItem('preference_setting');
@@ -117,6 +145,7 @@ export const addToUserFeed = subreddit => {
   axios.defaults.headers.common['Authorization'] = `Bearer ${sessionStorage.getItem('jwt')}`;
 
   return dispatch => {
+    dispatch({ type: "LOADING_USER_INFO"})
     axios.put(`${baseUrl}/preference_settings/${preference_setting_id}`, data)
       .then(resp => {
         dispatch({
@@ -134,6 +163,7 @@ export const removeFromUserFeed = subreddit => {
   axios.defaults.headers.common['Authorization'] = `Bearer ${sessionStorage.getItem('jwt')}`;
 
   return dispatch => {
+    dispatch({ type: "LOADING_USER_INFO"})
     axios.delete(`${baseUrl}/preference_settings/${preference_setting_id}`, { data: data })
       .then(resp => {
         dispatch({
@@ -141,24 +171,5 @@ export const removeFromUserFeed = subreddit => {
           payload: subreddit
         })
       })
-  }
-}
-
-export const getUserFeed = () => {
-  const preference_setting_id = sessionStorage.getItem('preference_setting');
-
-  return dispatch => {
-    // axios.get(`${baseUrl}/preference_settings/${preference_setting_id}`)
-    // .then(resp => {})
-    dispatch({ type: "LOADING_USER_INFO" });
-    fetch(`${baseUrl}/preference_settings/${preference_setting_id}`)
-      .then(resp => resp.json())
-        .then(data => {
-          debugger;
-          // dispatch({
-          //   type: 'GET_USER_FEED'
-          //   payload: data
-          // })
-        })
   }
 }

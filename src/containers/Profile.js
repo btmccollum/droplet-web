@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { linkRedditAccount, authenticateUser, removeFromUserFeed } from '../actions/userActions';
+import { linkRedditAccount, authenticateUser, removeFromUserFeed, deleteUser } from '../actions/userActions';
 import cuid from 'cuid';
 import { Row, Col, Button } from 'react-bootstrap';
 
@@ -47,15 +47,16 @@ class Profile extends Component {
               <span>Reddit Username: {user.username ? user.username : 'N/A'}</span><br/>
               <span>Email: {user.email}</span><br/>
 
+              <p>Current ID is {user.id} !</p>
               <h2>Your Droplet Feed:</h2>
               <ul>
                 {feeds}
               </ul>
 
               <h2>Account Actions</h2>
-              <p>{this.buttonDisplay()}</p>
+              {this.buttonDisplay()}
               <h5>Warning! The follow action cannot be undone.</h5>
-              <p><Button variant="danger">Delete Account</Button></p>
+              <p><Button variant="danger" onClick={() => this.props.deleteUser(user.id)}>Delete Account</Button></p>
             </div>
           </Col>
         </Row>
@@ -74,7 +75,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => bindActionCreators({
   authenticateUser,
   linkRedditAccount,
-  removeFromUserFeed
+  removeFromUserFeed,
+  deleteUser
 }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);
