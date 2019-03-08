@@ -11,11 +11,9 @@ export function fetchPosts(subreddits = null) {
     };
   
     return dispatch => {
-        debugger;
         dispatch({ type: "LOADING_POSTS" });
         return axios.get(`${baseUrl}/fetch_posts`, data)
             .then(response => {
-                debugger;
                 dispatch({ type: "FETCH_POSTS", payload: response.data.posts.data.children })
             })
     }

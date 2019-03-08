@@ -28,14 +28,16 @@ class Signup extends Component {
 
     handleErrors = () => {
       if (this.props.errors) { 
-      return (
-        this.props.errors.map(error => <li>{error}</li>)
-      )
+        return (
+          this.props.errors.map(error => <li>{error}</li>)
+        )
       }
     }
 
     componentWillUnmount() {
-      clearErrors()
+      if (this.props.errors.length > 0) {
+        clearErrors()
+      }
     }
   
     render() {

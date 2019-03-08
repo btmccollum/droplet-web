@@ -7,11 +7,27 @@ import { Row, Col, Button } from 'react-bootstrap';
 
 class Profile extends Component {
   buttonDisplay = () => {
-    if (Object.keys(this.props.user.currentUser).length > 0) {
+    
+    if (this.props.user.currentUser.linked) {
       return <Button variant="primary" disabled>Reddit Account Linked</Button>
     }
     else {
-      return <Button variant="primary" onClick={() => this.props.linkRedditAccount()}>Link My Reddit Account</Button>
+      return ( 
+        <React.Fragment>
+          <h5>Important! A valid Reddit account must be linked in order to use Droplet.</h5>
+          <Button variant="primary" onClick={() => this.props.linkRedditAccount()}>Link My Reddit Account</Button>
+        </React.Fragment>
+      )
+    }
+  }
+
+  loadImg = () => {
+    const user = this.props.user.currentUser;
+
+    if (user.img) {
+      return user.img
+    } else {
+      return process.env.PUBLIC_URL + '45332556-wassertropfen-umriss-symbol-modern-minimal-flache-design-stil-vektor-illustration.jpg'
     }
   }
 
@@ -27,8 +43,8 @@ class Profile extends Component {
         <Row className="d-flex justify-content-center w-100 h-100 align-items-center">
           <Col md={{ span: 8, offset: 4 }}>
             <div className="profile">
-              <p><img src={user.img} alt="user avatar"/></p>
-              <span>Reddit Username: {user.username}</span><br/>
+              <p><img src={this.loadImg()} alt="user avatar"/></p>
+              <span>Reddit Username: {user.username ? user.username : 'N/A'}</span><br/>
               <span>Email: {user.email}</span><br/>
 
               <h2>Your Droplet Feed:</h2>

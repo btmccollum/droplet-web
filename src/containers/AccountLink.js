@@ -6,34 +6,20 @@ import cuid from 'cuid';
 import { Row, Col, Button } from 'react-bootstrap';
 
 class AccountLink extends Component {
-  buttonDisplay = () => {
-    if (Object.keys(this.props.user.currentUser).length > 0) {
-      return <Button variant="primary" disabled>Reddit Account Linked</Button>
+    render() {
+        return (
+        <React.Fragment>
+            <Row className="d-flex justify-content-center w-100 h-100 align-items-center">
+            <Col md={{ span: 8, offset: 4 }}>
+                    <h1>Before you can get started!</h1>
+                    <p>A valid Reddit account is required in order to use Droplet. Click the link below to provide permission for your current Reddit account or create a new account.</p>
+                    
+                    <Button variant="primary" onClick={() => this.props.linkRedditAccount()}>Link My Reddit Account</Button>
+            </Col>
+            </Row>
+        </React.Fragment>
+        )
     }
-    else {
-      return <Button variant="primary" onClick={() => this.props.linkRedditAccount()}>Link My Reddit Account</Button>
-    }
-  }
-
-  render() {
-    // const feeds = this.props.feed.map(subreddit => { return ( 
-    //   <li key={cuid()}>{subreddit} <a href="#" onClick={() => this.props.removeFromUserFeed(subreddit)}>(Remove)</a></li> 
-    //   ) 
-    // });
-    // const user = this.props.user.currentUser;
-
-    return (
-      <React.Fragment>
-        <Row className="d-flex justify-content-center w-100 h-100 align-items-center">
-          <Col md={{ span: 8, offset: 4 }}>
-                <h1>In order to proceed you must link your Reddit account.</h1>
-                {/* <p>{this.buttonDisplay()}</p> */}
-                <Button variant="primary" onClick={() => this.props.linkRedditAccount()}>Link My Reddit Account</Button>
-          </Col>
-        </Row>
-      </React.Fragment>
-    )
-  }
 }
 
 const mapStateToProps = state => {

@@ -33,16 +33,51 @@ class App extends Component {
   }
 
   render() {
+    const linkedStatus = () => this.props.currentUser.linked ? true : false
+
     return (
       <div className="App">
         <SidebarMenu img={this.props.currentUser.img}/>
         <Switch>
         <ErrorBoundary>
-            <Route exact path ="/" component={ () => loggedIn() ? <Home /> : <Redirect to="/login"/> }/>
-            <Route path="/posts" component={ () => loggedIn() ? <Posts /> : <Redirect to="/"/> }/>
+            <Route exact path ="/" component={ 
+              () => {
+                if (loggedIn() && linkedStatus()) {
+                  return <Home /> 
+                } else if (loggedIn() && !linkedStatus()) {
+                  return <Profile />
+                } else {
+                  return <Redirect to="/login"/> 
+                }
+              }
+            }/>
+
+            <Route path="/posts" component={
+              () => {
+                if (loggedIn() && linkedStatus()) {
+                  return <Posts /> 
+                } else if (loggedIn() && !linkedStatus()) {
+                  return <Profile />
+                } else {
+                  return <Redirect to="/login"/> 
+                }
+              }
+            }/>
+        
             <Route path='/signup' component={ () => loggedIn() ? <Redirect to="/"/> : <Signup /> }/>
             <Route path='/profile' component={ () => loggedIn() ? <Profile /> : <Login /> }/>
-            <Route path='/link_account' component={ () => loggedIn() ? <AccountLink /> : <Login />} />
+            <Route path='/link_account' component={ 
+              () => {
+                if (loggedIn() && linkedStatus()) {
+                  return <Home /> 
+                } else if (loggedIn() && !linkedStatus()) {
+                  return <AccountLink />
+                } else {
+                  return <Redirect to="/login"/> 
+                }
+              }
+            }/>
+            
             <Route path='/login' component={ () => loggedIn() ? <Redirect to="/"/> : <Login /> }/>
             <Route path='/logout' render={ props => { 
               this.props.logoutUser();

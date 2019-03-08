@@ -29,14 +29,6 @@ export const signupUser = (user, callback) => {
     }
 }
 
-// .catch(err => {
-//   debugger;
-//   dispatch({
-//     type: 'CREATE_USER_FAILURE',
-//     message: err.response.data.error || 'Something went wrong.'
-//   })
-// })
-
 export const loginUser = (user, callback) => {
   const data = {
     body: JSON.stringify({ user })
