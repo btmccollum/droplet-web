@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Post from './Post';
 import cuid from 'cuid';
 import { Container } from 'react-bootstrap';

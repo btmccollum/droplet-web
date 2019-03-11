@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Button, Col } from 'react-bootstrap';
+import { Card, Button } from 'react-bootstrap';
 
 const buttonVariant = props => {
     const subreddit = props.subreddit;

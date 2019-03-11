@@ -59,7 +59,7 @@ class Profile extends Component {
                 {/* spacer */}
                 <div>&nbsp;</div>
 
-                <h5>Warning! The follow action cannot be undone.</h5>
+                <h5>Warning! The following action cannot be undone.</h5>
                 <p><Button variant="danger" onClick={() => this.props.deleteUser(user.id)}>Delete Account</Button></p>
               </div>
             </Col>

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { fetchPosts } from '../actions/postActions';
 import PostList from '../components/Posts/PostList';
 import Loading from '../components/Loading';
-import { Container, Row, Col, ButtonToolbar, ButtonGroup, DropdownButton, Dropdown, Button } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 
 class Posts extends Component {
     componentDidMount() { 
