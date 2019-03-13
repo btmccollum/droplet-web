@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const baseUrl = 'https://localhost:3000/api/v1'
+// const baseUrl = 'https://localhost:3000/api/v1'
+const baseUrl = 'https://droplet-app-api.herokuapp.com/api/v1'
 
 const setHeaders = () => { return axios.defaults.headers.common['Authorization'] = `Bearer ${sessionStorage.getItem('jwt')}` };
 
