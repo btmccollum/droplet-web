@@ -1,6 +1,9 @@
 {
   "name": "droplet-web",
   "version": "0.1.0",
+  "engines": {
+    "node": "11.9.0"
+  },
   "private": true,
   "proxy": "http://127.0.0.1:3000",
   "dependencies": {
