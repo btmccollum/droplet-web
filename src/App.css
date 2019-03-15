@@ -89,7 +89,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 /* ------------ POST MODAL ---------------- */
 
 .modal-content {
-  position: fixed;
+  /* position: fixed; */
   color: rgb(215, 218, 220);
   -webkit-border-radius: 10% !important;
   -moz-border-radius: 10% !important;
