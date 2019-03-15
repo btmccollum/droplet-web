@@ -32,11 +32,11 @@ class App extends Component {
   }
 
   render() {
-    const linkedStatus = () => this.props.currentUser.linked ? true : false
+    const linkedStatus = () => this.props.currentUser.linked
 
     return (
       <div className="App">
-        <SidebarMenu img={this.props.currentUser.img}/>
+        <SidebarMenu />
         <Switch>
         <ErrorBoundary>
             <Route exact path ="/" component={ 
