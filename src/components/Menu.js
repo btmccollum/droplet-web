@@ -7,6 +7,7 @@ import { NavLink } from 'react-router-dom';
 const ReduxBurgerMenu = reduxBurgerMenu(Menu);
 
 class SidebarMenu extends Component {
+    // handles conditional rendering of links dependent on whether or not a user is logged in
     statusOptions = () => {
         if (sessionStorage.getItem('logged_in') === 'true') {
             return (

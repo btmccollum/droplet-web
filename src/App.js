@@ -20,15 +20,11 @@ import { faHome, faImages, faSignInAlt, faSignOutAlt, faUserPlus, faCommentAlt, 
 library.add(fab, faHome, faImages, faSignInAlt, faSignOutAlt, faUserPlus, faCommentAlt, faArrowAltCircleUp, faMedal, faExternalLinkAlt, faUserCircle)
 
 class App extends Component {
-  // if a user causes state to refresh while logged_in we will force the server to reidentify and set the correct user
   componentDidMount() {
+    // if a user causes state to refresh while logged_in we will force the server to reidentify and set the correct user
     if (!!sessionStorage.getItem('logged_in') && Object.keys(this.props.currentUser).length < 1 ) {
       this.props.authenticateUser()
     }
-  }
-  
-  showState = () => {
-    console.log(this.props.currentUser)
   }
 
   render() {
@@ -39,6 +35,7 @@ class App extends Component {
         <SidebarMenu />
         <Switch>
         <ErrorBoundary>
+            {/* Route logic to ensure a user is not able to visit pages without being logged in and having a linked account in some cases */}
             <Route exact path ="/" component={ 
               () => {
                 if (loggedIn() && linkedStatus()) {
@@ -96,6 +93,7 @@ const mapStateToProps = state => {
   }
 }
 
+// simple check for whether or not a user is logged in, stored at sign up or log in
 const loggedIn = () => !!sessionStorage['logged_in'];
 
 export default withRouter(connect(mapStateToProps, { logoutUser, authenticateUser })(App));

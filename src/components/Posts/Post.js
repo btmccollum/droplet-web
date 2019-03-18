@@ -61,9 +61,9 @@ class Post extends Component {
     } else if (!!details.selftext) {
       return ReactHtmlParser(htmlDecode(details.selftext_html))
     } else if (details.thumbnail === 'self') { 
-      return <img src={process.env.PUBLIC_URL + '45332556-wassertropfen-umriss-symbol-modern-minimal-flache-design-stil-vektor-illustration.jpg'} />
+      return <img src={process.env.PUBLIC_URL + '45332556-wassertropfen-umriss-symbol-modern-minimal-flache-design-stil-vektor-illustration.jpg'} alt="water droplet logo placeholder" />
     } else if (details.post_hint === 'image') {
-      return <img src={details.url} />
+      return <img src={details.url} alt="main content" />
     } else {
       return <a href={details.url}>{details.url}</a>
     }
@@ -83,7 +83,7 @@ class Post extends Component {
       thumbnail = details.thumbnail
     }
 
-    return ( <img className="postThumbnail" src={thumbnail} /> )
+    return ( <img className="postThumbnail" src={thumbnail} alt="post thumbnail" /> )
   }
 
   sumGildings = () => {
@@ -123,6 +123,7 @@ class Post extends Component {
           
           </Container>
 
+        {/* Handling display for modal, launched when clicked by user and handles comments for each post when mounted */}
         <Modal 
             show={this.state.show} 
             onHide={this.handleClose}

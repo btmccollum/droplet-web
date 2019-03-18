@@ -24,10 +24,12 @@ class Signup extends Component {
     handleOnSubmit = event => {
       event.preventDefault()
       const user = this.state
+      // action to create user account and callback to redirect to link account page
       this.props.signupUser(user, () => this.props.history.push('/link_account'))
     }
 
     handleErrors = () => {
+      // loading form errors from rails API if present
       if (this.props.errors) { 
         return (
           this.props.errors.map(error => <li key={cuid()}>{error}</li>)
@@ -36,6 +38,7 @@ class Signup extends Component {
     }
 
     componentWillUnmount() {
+      // clearing subreddits when unmounted so a fresh list is populated when revisted
       if (this.props.errors.length > 0) {
         clearErrors()
       }
@@ -45,6 +48,7 @@ class Signup extends Component {
       const { email, password, password_confirmation } = this.state;
       // const { errors } = this.props;
   
+      // rendering a signup form for user display
       return (
         <React.Fragment>
           <Container className="h-100">

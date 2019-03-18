@@ -14,7 +14,9 @@ export const signupUser = (user, callback) => {
     axios.defaults.headers.common['Authorization'] = null;
 
     return dispatch => {
+      // updating load status while async action executes
       dispatch({ type: "LOADING_USER_INFO"})
+
       axios.post(`${ baseUrl }/users`, data)
         .then(json => {
           sessionStorage.setItem('logged_in', 'true')
@@ -41,7 +43,9 @@ export const loginUser = (user, callback) => {
   axios.defaults.headers.common['Authorization'] = null;
 
   return dispatch => {
+    // updating load status while async action executes
     dispatch({ type: "LOADING_USER_INFO"})
+
     axios.post(`${ baseUrl }/auth`, data)
       .then(json => {
         sessionStorage.setItem('logged_in', 'true')
@@ -72,7 +76,9 @@ export const logoutUser = () => {
   sessionStorage.removeItem('logged_in')
   
   return dispatch => {
+    // updating load status while async action executes
     dispatch({ type: "LOADING_USER_INFO"})
+
     axios.post(`${baseUrl}/logout`)
       .then(resp => {
         dispatch({
@@ -86,8 +92,12 @@ export const logoutUser = () => {
 
 export const authenticateUser = () => {
   return dispatch => {
+    // setting authorization header ahead of axios request
     setHeaders()
+
+    // updating load status while async action executes
     dispatch({ type: "LOADING_USER_INFO"})
+
     axios.get(`${baseUrl}/load_user`)
       .then( json => {
         sessionStorage.setItem('preference_setting', json.data.preferences)
@@ -100,10 +110,13 @@ export const authenticateUser = () => {
 }
 
 export const deleteUser = id => {
+  // setting authorization header ahead of axios request
   setHeaders();
 
   return dispatch => {
+    // updating load status while async action executes
     dispatch({ type: "LOADING_USER_INFO"})
+
     axios.delete(`${baseUrl}/users/${id}`)
       .then( json => {
         sessionStorage.removeItem('jwt') 
@@ -121,6 +134,7 @@ export const deleteUser = id => {
 // --------------- USER ACCOUNT ACTIONS ---------------
 
 export const linkRedditAccount = () => {
+  // manually setting data object for sake of fetch display
   const data = { 
     headers: {
         Authorization: `Bearer ${sessionStorage.getItem('jwt')}`
@@ -128,9 +142,11 @@ export const linkRedditAccount = () => {
   };
 
  return dispatch => {
+  //  axios would normally be used, fetch variant placed for purposes of demonstration
     fetch(`${baseUrl}/link_oauth`, data)
       .then(resp => resp.json())
         .then(json => {
+          // automatically redirecting the user to the reddit authorization link to authorize the app, will be redirected back to site after accepting
           window.location = `${json.url}${json.query_params}`
         })
         .catch(console.error)
@@ -143,10 +159,13 @@ export const addToUserFeed = subreddit => {
   const preference_setting_id = sessionStorage.getItem('preference_setting');
   const data = { body: JSON.stringify({ subreddit }) };
 
-  axios.defaults.headers.common['Authorization'] = `Bearer ${sessionStorage.getItem('jwt')}`;
+  // setting authorization header ahead of axios request
+  setHeaders();
 
   return dispatch => {
+    // updating load status while async action executes
     dispatch({ type: "LOADING_USER_INFO"})
+
     axios.put(`${baseUrl}/preference_settings/${preference_setting_id}`, data)
       .then(resp => {
         dispatch({
@@ -161,10 +180,13 @@ export const removeFromUserFeed = subreddit => {
   const preference_setting_id = sessionStorage.getItem('preference_setting');
   const data = { body: JSON.stringify({ subreddit }) };
 
-  axios.defaults.headers.common['Authorization'] = `Bearer ${sessionStorage.getItem('jwt')}`;
+  // setting authorization header ahead of axios request
+  setHeaders();
 
   return dispatch => {
+    // updating load status while async action executes
     dispatch({ type: "LOADING_USER_INFO"})
+
     axios.delete(`${baseUrl}/preference_settings/${preference_setting_id}`, { data: data })
       .then(resp => {
         dispatch({

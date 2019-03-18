@@ -4,7 +4,7 @@ function postsReducer(state = { posts: [], loading: false }, action) {
             return { ...state, loading: true };
 
         case "FETCH_POSTS":
-            return { loading: false, posts: action.payload };
+            return { ...state, loading: false, posts: action.payload };
             
         default:
             return state;

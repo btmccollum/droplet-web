@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, Button } from 'react-bootstrap';
 
+// handing display for button
 const buttonVariant = props => {
     const subreddit = props.subreddit;
 
@@ -32,6 +33,7 @@ const buttonVariant = props => {
     }
 }
 
+// responsible for display of subreddit cards
 const SubredditCard = props => {
     const subreddit = props.subreddit;
 

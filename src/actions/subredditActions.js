@@ -11,7 +11,9 @@ export function fetchSubreddits() {
     };
     
     return dispatch => {
+        // updating load status while async action executes
         dispatch({ type: "LOADING_SUBREDDITS" });
+        
         return axios.get(`${baseUrl}/fetch_subreddits`, data)
             .then(response => {
                 dispatch({ type: "FETCH_SUBREDDITS", payload: response.data.subreddits.data.children })

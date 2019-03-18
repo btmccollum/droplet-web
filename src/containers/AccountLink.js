@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { linkRedditAccount, authenticateUser, removeFromUserFeed } from '../actions/userActions';
-import cuid from 'cuid';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 
 class AccountLink extends Component {

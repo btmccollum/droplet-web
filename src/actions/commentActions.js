@@ -15,7 +15,9 @@ export function fetchComments(post) {
     };
     
     return dispatch => {
+        // updating load status while async action executes
         dispatch({ type: "LOADING_COMMENTS" });
+        
         return axios.get(`${baseUrl}/fetch_comments`, data)
             .then(response => {
                 dispatch({ type: "FETCH_COMMENTS", payload: response.data.comments[1].data.children })

@@ -32,8 +32,9 @@ class Profile extends Component {
   }
 
   render() {
-    const feeds = this.props.feed.map(subreddit => { return ( 
-      <li key={cuid()}>{subreddit} <a href="#" onClick={() => this.props.removeFromUserFeed(subreddit)}>(Remove)</a></li> 
+    const feeds = this.props.feed.map(subreddit => { 
+      return ( 
+        <li key={cuid()}>{subreddit} <Button variant="link" size="sm" onClick={() => this.props.removeFromUserFeed(subreddit)}>(Remove)</Button></li> 
       ) 
     });
     const user = this.props.user.currentUser;

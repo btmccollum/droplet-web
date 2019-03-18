@@ -7,6 +7,7 @@ import { Container } from 'react-bootstrap';
 
 class Posts extends Component {
     componentDidMount() { 
+        // when component mounts we send an action to handle retrieval of posts specific to user's feed
         this.props.fetchPosts(this.props.feed);
     }
 

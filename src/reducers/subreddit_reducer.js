@@ -4,7 +4,7 @@ function subredditReducer(state = { subreddits: [], loading: false }, action) {
             return { ...state, loading: true };
 
         case "FETCH_SUBREDDITS":
-            return { loading: false, subreddits: action.payload };
+            return { ...state, loading: false, subreddits: action.payload };
             
         default:
             return state;

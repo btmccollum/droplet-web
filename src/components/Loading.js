@@ -2,6 +2,7 @@ import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 
 const Loading = props => {  
+    // handles the display for components in a loading state
     return (
         <React.Fragment>
             <Container className="h-100">

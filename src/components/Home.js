@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 import SubredditDisplay from '../containers/SubredditDisplay';
 
 const Home = () => {
+    // Display for home page 
     return (
         <Container>
             <Row>
