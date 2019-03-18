@@ -47,7 +47,7 @@ class Signup extends Component {
     render() {
       const { email, password, password_confirmation } = this.state;
       // const { errors } = this.props;
-  
+      
       // rendering a signup form for user display
       return (
         <React.Fragment>

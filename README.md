@@ -9,7 +9,7 @@ At this point in time you can expect the following functionality:<br>
 * Ability to browse the 100 top posts from your personalized feed
 * Ability to open any given post from Reddit and view up to the 100 most recent comments
 
-Droplet-api is the backend repo for the Droplet web app. To access the React/Redux frontend, droplet-web, please [click here](https://github.com/btmccollum/droplet-web).
+Droplet-web is the frontend repo for the Droplet web app. To access the Rails API backend, droplet-api, please [click here](https://github.com/btmccollum/droplet-api).
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
