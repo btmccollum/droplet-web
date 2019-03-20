@@ -16,7 +16,7 @@ class SubredditDisplay extends Component {
     loadSubreddits = () => {
         // conditional rendering based on subreddits load status
         if (this.props.subreddits.length > 1) {
-            return <SubredditCardList subreddits={this.props.subreddits} addToUserFeed={this.props.addToUserFeed} removeFromUserFeed={this.props.removeFromUserFeed} feed={this.props.feed}/>
+        return <SubredditCardList subreddits={this.props.subreddits} addToUserFeed={this.props.addToUserFeed} removeFromUserFeed={this.props.removeFromUserFeed} feed={this.props.feed}/>
         }
         else {
             return <Loading />

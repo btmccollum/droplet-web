@@ -73,11 +73,21 @@ class Post extends Component {
     const details = this.props.post;
     let thumbnail;
 
+    // debugger;
     if (details.thumbnail === 'self' || details.thumbnail === 'default') {
       thumbnail = process.env.PUBLIC_URL + '45332556-wassertropfen-umriss-symbol-modern-minimal-flache-design-stil-vektor-illustration.jpg'
     } 
-    else if (details.thumbnail === "" && !details.secure_media.thumbnail_url) {
+    else if (details.thumbnail === "" && details.secure_media === null) {
+      thumbnail = process.env.PUBLIC_URL + '45332556-wassertropfen-umriss-symbol-modern-minimal-flache-design-stil-vektor-illustration.jpg'
+    }
+    else if (details.thumbnail === "" && !!details.secure_media.oembed.thumbnail_url) {
+      thumbnail = details.secure_media.oembed.thumbnail_url
+    }
+    else if (details.thumbnail === "" && !!details.secure_media.thumbnail_url) {
       thumbnail = details.secure_media.thumbnail_url
+    }
+    else if (details.thumbnail === "") {
+      thumbnail = process.env.PUBLIC_URL + '45332556-wassertropfen-umriss-symbol-modern-minimal-flache-design-stil-vektor-illustration.jpg'
     }
     else {
       thumbnail = details.thumbnail
