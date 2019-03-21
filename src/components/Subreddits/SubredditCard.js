@@ -5,11 +5,11 @@ import { Card, Button } from 'react-bootstrap';
 const buttonVariant = props => {
     const subreddit = props.subreddit;
 
-    if (props.feed.includes(subreddit.display_name)) {
+    if (props.feed.includes(subreddit.display_name.toLowerCase())) {
         return (
             <Button 
                 variant="outline-secondary"
-                onClick={() => props.removeFromUserFeed(subreddit.display_name)}> 
+                onClick={() => props.removeFromUserFeed(subreddit.display_name.toLowerCase())}> 
                 Remove From Feed </Button>
         )
     }
@@ -17,7 +17,7 @@ const buttonVariant = props => {
         return (
             <Button 
                 variant="danger"
-                onClick={() => props.addToUserFeed(subreddit.display_name)}>
+                onClick={() => props.addToUserFeed(subreddit.display_name.toLowerCase())}>
                 NSFW - Add To Feed
             </Button>
         )
@@ -26,7 +26,7 @@ const buttonVariant = props => {
         return (
             <Button 
                 variant="primary"
-                onClick={() => props.addToUserFeed(subreddit.display_name)}>
+                onClick={() => props.addToUserFeed(subreddit.display_name.toLowerCase())}>
                 Add To Feed
             </Button>
         )

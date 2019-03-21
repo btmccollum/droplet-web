@@ -26,7 +26,7 @@ class SubredditDisplay extends Component {
     render() {
         return (
             <div className="srList">
-                <h4>Check Out the Most Popular Subreddits:</h4>
+                <h4>Check out the most popular subreddits:</h4>
                 {this.loadSubreddits()}
             </div>
         )

@@ -311,6 +311,27 @@ Note: Beware of modifying this element as it can break the animations - you shou
   text-align: center;
 }
 
+.feedButtonLeft {
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
+
+/* ------------ FEED POPOVER ON HOME PAGE ---------------- */
+
+#popover-basic {
+  border: 1px solid rgb(78, 82, 86);
+}
+
+.popover-header,
+.popover-body {
+  background-color: rgb(26, 26, 27) !important;
+  color: rgb(215, 218, 220) !important;
+}
+
+.popover-header {
+  border-bottom: 0px !important;
+}
+
 .subRedditCards.card-columns {
   /* @include media-breakpoint-only(md) {
     column-count: 2;

@@ -13,19 +13,23 @@ class SubredditSearch extends Component {
     }
     
   handleOnChange = event => {
-    this.setState({
-        query_string: event.target.value
-    })
+    this.setState({ query_string: event.target.value })
   }
 
   handleOnSubmit = event => {
     event.preventDefault()
 
+    //capturing subreddit entry, sending it to action and clear local state
     const subreddit = this.state.query_string
     this.props.addToUserFeed(subreddit)
+    this.setState({ query_string: '' })
+  
+    //reset the form field after submission
+    event.target.reset()
   }
 
   handleErrors = () => {
+    // error handling from Rails API 
     if (this.props.errors) { 
       return (
         this.props.errors.map(error => <li key={cuid()}>{error}</li>)
@@ -42,10 +46,9 @@ class SubredditSearch extends Component {
   render() {
     return (
       <React.Fragment>
-        Search bar goes here...
-        <Form inline onSubmit={this.handleOnSubmit}>
-            <FormControl type="text" placeholder="Search" className="mr-sm-2" onChange={this.handleOnChange} />
-            <Button variant="outline-primary" type="submit">Search</Button>
+        <Form inline onSubmit={this.handleOnSubmit} className="justify-content-center">
+            <FormControl type="text" placeholder="Subreddit Name..." className="mr-sm-2" onChange={this.handleOnChange} />
+            <Button variant="primary" type="submit">Add To Feed</Button>
         </Form>
       </React.Fragment>
     )
