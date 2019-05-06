@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-// const baseUrl = 'https://localhost:3000/api/v1'
-const baseUrl = 'https://droplet-app-api.herokuapp.com/api/v1'
+const baseUrl = 'https://localhost:3000/api/v1'
+// const baseUrl = 'https://droplet-app-api.herokuapp.com/api/v1'
 
 export function fetchComments(post) {
     let data = { 
