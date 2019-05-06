@@ -99,7 +99,11 @@ class Post extends Component {
   sumGildings = () => {
     const details = this.props.post;
 
-    return Object.values(details.gildings).reduce((a,b) => a + b)
+    if (details.total_awards_received > 0) {
+      return Object.values(details.gildings).reduce((a,b) => a + b)
+    } else {
+      return 0
+    }
   }
 
   render() {
