@@ -9,8 +9,7 @@ export function fetchComments(post) {
             Authorization: `Bearer ${sessionStorage.getItem('jwt')}`
         },
         params: JSON.stringify({
-            'subreddit': post.subreddit,
-            'id': post.id
+            'path': post.permalink,
         })
     };
     
