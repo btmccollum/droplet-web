@@ -9,8 +9,7 @@ export function fetchComments(post) {
             Authorization: `Bearer ${sessionStorage.getItem('jwt')}`
         },
         params: JSON.stringify({
-            'subreddit': post.subreddit,
-            'id': post.id
+            'path': post.permalink
         })
     };
     
@@ -20,6 +19,7 @@ export function fetchComments(post) {
         
         return axios.get(`${baseUrl}/fetch_comments`, data)
             .then(response => {
+                debugger;
                 dispatch({ type: "FETCH_COMMENTS", payload: response.data.comments[1].data.children })
             })
     }
