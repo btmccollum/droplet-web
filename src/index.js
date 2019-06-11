@@ -8,6 +8,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers/root_reducer';
 import { BrowserRouter as Router } from 'react-router-dom'
+import { authenticateUser } from './actions/userActions';
 
 export const store = createStore(
     rootReducer,
@@ -20,6 +21,14 @@ export const store = createStore(
         window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() : f => f
     )
 );
+
+// ensuring we keep a 'logged in' user's information updated on refresh, if jwt token is present we re-authenticate on reload
+const token = sessionStorage.getItem('jwt')
+
+// dispatch authenticateUser to authenticate token with backend and re-updated users info in store
+if (token) {
+  store.dispatch(authenticateUser())
+}
 
 ReactDOM.render((
     <Provider store={store}>

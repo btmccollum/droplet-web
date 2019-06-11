@@ -136,6 +136,26 @@ Note: Beware of modifying this element as it can break the animations - you shou
   text-align: center !important;
 }
 
+.dynamicModalContentBody {
+  width: 100;
+}
+
+.dynamicModalContent {
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+.player-wrapper {
+  position: relative;
+  padding-top: 56.25% /* Player ratio: 100 / (1280 / 720) */
+}
+ 
+.react-player {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 .modalCommentList {
   border-top: .5px solid rgb(52, 53, 54) !important;
   padding-top: 2.5%;

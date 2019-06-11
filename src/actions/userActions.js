@@ -7,96 +7,96 @@ const setHeaders = () => { return axios.defaults.headers.common['Authorization']
 
 // --------------- USER STATE ACTIONS ---------------
 
-export const signupUser = (user, callback) => {
+  export const signupUser = (user, callback) => {
+      const data = {
+        body: JSON.stringify({ user })
+      }
+      axios.defaults.headers.common['Authorization'] = null;
+
+      return dispatch => {
+        // updating load status while async action executes
+        dispatch({ type: "LOADING_USER_INFO"})
+
+        axios.post(`${ baseUrl }/users`, data)
+          .then(json => {
+            sessionStorage.setItem('logged_in', 'true')
+            sessionStorage.setItem('jwt', json.data.jwt)
+            sessionStorage.setItem('preference_setting', json.data.preferences)
+
+            dispatch({
+              type: 'SET_USER',
+              payload: json.data
+            });
+            callback()
+          })
+          .catch(error => {
+            dispatch({ type: 'SHOW_ERROR', message: error.response.data.error })
+          })
+      }
+  }
+
+  export const loginUser = (user, callback) => {
     const data = {
       body: JSON.stringify({ user })
     }
+
     axios.defaults.headers.common['Authorization'] = null;
 
     return dispatch => {
       // updating load status while async action executes
       dispatch({ type: "LOADING_USER_INFO"})
 
-      axios.post(`${ baseUrl }/users`, data)
+      axios.post(`${ baseUrl }/auth`, data)
         .then(json => {
           sessionStorage.setItem('logged_in', 'true')
           sessionStorage.setItem('jwt', json.data.jwt)
-          sessionStorage.setItem('preference_setting', json.data.preferences)
-
+          sessionStorage.setItem('preference_setting', json.data.preferences.id)
+          
           dispatch({
-            type: 'SET_USER',
+            type: 'AUTHENTICATE_USER',
             payload: json.data
-          });
+          })
+
           callback()
         })
         .catch(error => {
           dispatch({ type: 'SHOW_ERROR', message: error.response.data.error })
         })
     }
-}
-
-export const loginUser = (user, callback) => {
-  const data = {
-    body: JSON.stringify({ user })
   }
 
-  axios.defaults.headers.common['Authorization'] = null;
+  export const logoutUser = () => {
+    axios.defaults.headers.common['Authorization'] = null;
 
-  return dispatch => {
-    // updating load status while async action executes
-    dispatch({ type: "LOADING_USER_INFO"})
+    if (sessionStorage['jwt']) { 
+      sessionStorage.removeItem('jwt') 
+      sessionStorage.removeItem('preference_setting')
+    }
 
-    axios.post(`${ baseUrl }/auth`, data)
-      .then(json => {
-        sessionStorage.setItem('logged_in', 'true')
-        sessionStorage.setItem('jwt', json.data.jwt)
-        sessionStorage.setItem('preference_setting', json.data.preferences.id)
-        
-        dispatch({
-          type: 'AUTHENTICATE_USER',
-          payload: json.data
+    sessionStorage.removeItem('logged_in')
+    
+    return dispatch => {
+      // updating load status while async action executes
+      dispatch({ type: "LOADING_USER_INFO"})
+
+      axios.post(`${baseUrl}/logout`)
+        .then(resp => {
+          dispatch({
+            type: 'LOGOUT_USER',
+            payload: ''
+          })
         })
+    .catch(error => {console.log(error.message)})
+    }
+  }   
 
-        callback()
-      })
-      .catch(error => {
-        dispatch({ type: 'SHOW_ERROR', message: error.response.data.error })
-      })
-  }
-}
+  export const authenticateUser = () => {
+    return dispatch => {
+      // setting authorization header ahead of axios request
+      setHeaders()
 
-export const logoutUser = () => {
-  axios.defaults.headers.common['Authorization'] = null;
-
-  if (sessionStorage['jwt']) { 
-    sessionStorage.removeItem('jwt') 
-    sessionStorage.removeItem('preference_setting')
-  }
-
-  sessionStorage.removeItem('logged_in')
-  
-  return dispatch => {
-    // updating load status while async action executes
-    dispatch({ type: "LOADING_USER_INFO"})
-
-    axios.post(`${baseUrl}/logout`)
-      .then(resp => {
-        dispatch({
-          type: 'LOGOUT_USER',
-          payload: ''
-        })
-      })
-  .catch(error => {console.log(error.message)})
-  }
-}   
-
-export const authenticateUser = () => {
-  return dispatch => {
-    // setting authorization header ahead of axios request
-    setHeaders()
-
-    // updating load status while async action executes
-    dispatch({ type: "LOADING_USER_INFO"})
+      // updating load status while async action executes
+      dispatch({ type: "LOADING_USER_INFO"})
 
     axios.get(`${baseUrl}/load_user`)
       .then( json => {

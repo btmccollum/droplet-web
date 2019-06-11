@@ -20,13 +20,6 @@ import { faHome, faImages, faSignInAlt, faSignOutAlt, faUserPlus, faCommentAlt, 
 library.add(fab, faHome, faImages, faSignInAlt, faSignOutAlt, faUserPlus, faCommentAlt, faArrowAltCircleUp, faMedal, faExternalLinkAlt, faUserCircle)
 
 class App extends Component {
-  componentDidMount() {
-    // if a user causes state to refresh while logged_in we will force the server to reidentify and set the correct user
-    if (!!sessionStorage.getItem('logged_in') && Object.keys(this.props.currentUser).length < 1 ) {
-      this.props.authenticateUser()
-    }
-  }
-
   render() {
     const linkedStatus = () => this.props.currentUser.linked
 

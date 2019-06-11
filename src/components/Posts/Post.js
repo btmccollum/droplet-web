@@ -1,79 +1,83 @@
-import React, { Component } from 'react';
-import { Modal, Container, Row, Col } from 'react-bootstrap';
-import Comments from '../../containers/Comments';
-import ReactPlayer from 'react-player';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import ReactHtmlParser from 'react-html-parser';
+import React, { Component } from 'react'
+import { Modal, Container, Row, Col } from 'react-bootstrap'
+import Comments from '../../containers/Comments'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import ReactHtmlParser from 'react-html-parser'
+import ResponsivePlayer from '../ResponsivePlayer'
 
 function htmlDecode(input){
-  var doc = new DOMParser().parseFromString(input, "text/html");
-  return doc.documentElement.textContent;
+  var doc = new DOMParser().parseFromString(input, "text/html")
+  return doc.documentElement.textContent
 }
 
 class Post extends Component {
   constructor(props, context) {
-    super(props, context);
+    super(props, context)
 
-    this.handleShow = this.handleShow.bind(this);
-    this.handleClose = this.handleClose.bind(this);
+    this.handleShow = this.handleShow.bind(this)
+    this.handleClose = this.handleClose.bind(this)
 
     this.state = {
       show: false,
-    };
+    }
   }
     
   handleClose() {
-    this.setState({ show: false });
+    this.setState({ show: false })
   }
 
   handleShow() {
-    this.setState({ show: true });
+    this.setState({ show: true })
   }
 
+  // Reddit API can return many inconsistent types of data, using multiple if statements to account for them
   determineContentToLoad = () => {
-    const details = this.props.post;
-    if (Object.keys(details.media_embed).length !== 0) {
-       return ReactHtmlParser(htmlDecode(details.media.oembed.html))
+    const details = this.props.post
+    if (details.media !== null) {
+        if (details.media.reddit_video) {
+          return ( 
+            <ResponsivePlayer url={details.media.reddit_video.fallback_url} loopSetting="true" />
+          )
+        } else if (details.secure_media_embed) {
+    
+            if (details.domain === "gfycat.com") {
+        
+              return (
+                <ResponsivePlayer url={details.preview.reddit_video_preview.fallback_url} loopSetting="true" />
+              )
+            } else {
+              return (
+                <ResponsivePlayer url={details.url} loopSetting="true" />  
+              )
+            }
+        } else {
+          return (
+            <ResponsivePlayer url={details.media.reddit_video.fallback_url} loopSetting="false" />
+          )
+        }
     } else if (details.preview !== undefined && details.preview.reddit_video_preview) {
-      return (
-        <ReactPlayer 
-          url={details.preview.reddit_video_preview.fallback_url} 
-          playing 
-          loop
-          config={{ 
-            forceDASH: true,
-            forceHLS: true 
-          }}  
-        />
-      )
+        return (
+          <ResponsivePlayer url={details.preview.reddit_video_preview.fallback_url} loopSetting="true" />
+        )
     } else if (!!details.preview && details.media !== null && details.media.reddit_video !== undefined) {
-      return (
-        <ReactPlayer 
-          url={details.media.reddit_video.fallback_url} 
-          playing 
-          loop
-          config={{ 
-            forceDASH: true,
-            forceHLS: true 
-          }}  
-        />
-      )
+        return (
+          <ResponsivePlayer url={details.media.reddit_video.fallback_url} />
+        )
     } else if (!!details.selftext) {
       return ReactHtmlParser(htmlDecode(details.selftext_html))
-    } else if (details.thumbnail === 'self') { 
-      return <img src={process.env.PUBLIC_URL + '45332556-wassertropfen-umriss-symbol-modern-minimal-flache-design-stil-vektor-illustration.jpg'} alt="water droplet logo placeholder" />
     } else if (details.post_hint === 'image') {
       return <img src={details.url} alt="main content" />
     } else {
-      return <a href={details.url}>{details.url}</a>
+      return(
+        <a className="dynamicModalContent" href={details.url}>{details.url}</a>
+      ) 
     }
   }
 
   findThumbnail = () => {
-    const details = this.props.post;
-    let thumbnail;
+    const details = this.props.post
+    let thumbnail
 
-    // debugger;
     if (details.thumbnail === 'self' || details.thumbnail === 'default') {
       thumbnail = process.env.PUBLIC_URL + '45332556-wassertropfen-umriss-symbol-modern-minimal-flache-design-stil-vektor-illustration.jpg'
     } 
@@ -97,7 +101,7 @@ class Post extends Component {
   }
 
   sumGildings = () => {
-    const details = this.props.post;
+    const details = this.props.post
 
     if (details.total_awards_received > 0) {
       return Object.values(details.gildings).reduce((a,b) => a + b)
@@ -107,7 +111,7 @@ class Post extends Component {
   }
 
   render() {
-    const details = this.props.post;
+    const details = this.props.post
 
     return (
       <React.Fragment>
@@ -155,7 +159,7 @@ class Post extends Component {
                   </Modal.Title>
                 </Col>
                 <Col className="modalContent" md={{ span: 12 }}>
-                  <div>{this.determineContentToLoad()}</div>
+                  {this.determineContentToLoad()}
                   <span className="postSubtitle">{details.score} points - Posted by {details.author} in {details.subreddit_name_prefixed}</span>
                 </Col>
               </Row>
@@ -170,4 +174,4 @@ class Post extends Component {
   }
 }
 
-export default Post;
+export default Post
